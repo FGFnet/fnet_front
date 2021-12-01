@@ -44,6 +44,7 @@
 		DE19DCE6DCB96C36F9B00E73 /* Pods-Inception.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inception.release.xcconfig"; path = "Target Support Files/Pods-Inception/Pods-Inception.release.xcconfig"; sourceTree = "<group>"; };
 		ECD9551E7D36DF2115D116DF /* libPods-Inception-InceptionTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Inception-InceptionTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F8918EE9275724340030A280 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,7 @@
 		13B07FAE1A68108700A75B9A /* Inception */ = {
 			isa = PBXGroup;
 			children = (
+				F8918EE8275724270030A280 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -145,8 +147,15 @@
 				673BCF6E767ADA8CD48496B6 /* Pods-Inception-InceptionTests.debug.xcconfig */,
 				0FBFBCC09575735D04E638FE /* Pods-Inception-InceptionTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F8918EE8275724270030A280 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F8918EE9275724340030A280 /* Ionicons.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

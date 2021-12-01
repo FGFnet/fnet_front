@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, {Component} from 'react';
 import {
   SafeAreaView,
@@ -25,8 +17,12 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-class App extends Component{
+import HomeScreen from './screens/home/home';
 
+const App = () => {
+  return (
+    <HomeScreen/>
+  )
 }
 
 export default App;
