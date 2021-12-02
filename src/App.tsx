@@ -18,10 +18,13 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import HomeScreen from './screens/home/home';
+import {PaperProvider} from './providers';
 
 const App = () => {
   return (
-    <HomeScreen/>
+    <PaperProvider>
+      <HomeScreen/>
+    </PaperProvider>
   )
 }
 
