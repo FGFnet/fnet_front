@@ -4,7 +4,7 @@ import {
   DefaultTheme,
   Provider as ReactNativePaperProvider,
 } from 'react-native-paper';
-
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import {Colors} from '../constants';
 
 const fontConfig = {
@@ -14,7 +14,7 @@ const fontConfig = {
       fontWeight: 'normal'
     },
     medium: {
-      fontFamily: 'NanumSquareRoundR',
+      fontFamily: 'NanumSquareRoundL',
       fontWeight: 'normal'
     },
     light: {
@@ -32,7 +32,7 @@ const fontConfig = {
       fontWeight: 'normal'
     },
     medium: {
-      fontFamily: 'NanumSquareRoundR',
+      fontFamily: 'NanumSquareRoundL',
       fontWeight: 'normal'
     },
     light: {
@@ -50,7 +50,7 @@ const fontConfig = {
       fontWeight: 'normal'
     },
     medium: {
-      fontFamily: 'NanumSquareRoundR',
+      fontFamily: 'NanumSquareRoundL',
       fontWeight: 'normal'
     },
     light: {
@@ -79,8 +79,13 @@ const theme = {
 
 export function PaperProvider({children}: {children: React.ReactNode}) {
   return (
-    <ReactNativePaperProvider theme={theme}>
+    <ReactNativePaperProvider theme={theme}
+      settings={{
+        icon: props=><Ionicons {...props}/>
+      }}
+    >
       {children}
     </ReactNativePaperProvider>
   );
 }
+
