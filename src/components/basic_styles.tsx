@@ -2,6 +2,11 @@ import {Colors} from '../constants';
 import { StyleSheet, Text, View } from 'react-native';
 
 export const basicStyles = StyleSheet.create({
+    container: {
+        padding: 40,
+        flex: 1,
+        alignItems: 'flex-start'
+    },
     titleText: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -11,6 +16,11 @@ export const basicStyles = StyleSheet.create({
         paddingRight: 14,
     },
     contentText: {
-        marginBottom: 5,
+        marginBottom: 8,
+    },
+    insideRowContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 20,
     }
 })
