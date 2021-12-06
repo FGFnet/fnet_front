@@ -17,6 +17,7 @@
 		9ED28164D9F84AB6B50C77A3 /* NanumSquareRoundR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 420A39795C224181923152B0 /* NanumSquareRoundR.ttf */; };
 		C07C8EF01FA140B1A0B458F5 /* NanumSquareRoundL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C008BE52A2E845B6B7285913 /* NanumSquareRoundL.ttf */; };
 		C1BB403812D3A9323D6272AB /* libPods-Inception-InceptionTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD9551E7D36DF2115D116DF /* libPods-Inception-InceptionTests.a */; };
+		F866B68E275E2DB500B2F48E /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F866B68D275E2DB500B2F48E /* SplashScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,10 +42,10 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Inception/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Inception/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Inception/main.m; sourceTree = "<group>"; };
-		14726AFE2DE24ED9A51F6035 /* NanumSquareRoundB.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = NanumSquareRoundB.ttf; path = ../assets/fonts/NanumSquareRoundB.ttf; sourceTree = "<group>"; };
+		14726AFE2DE24ED9A51F6035 /* NanumSquareRoundB.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NanumSquareRoundB.ttf; path = ../assets/fonts/NanumSquareRoundB.ttf; sourceTree = "<group>"; };
 		160572C3BF8941BD8FB51E34 /* NanumSquareRoundOTFB.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NanumSquareRoundOTFB.otf; path = ../assets/fonts/NanumSquareRoundOTFB.otf; sourceTree = "<group>"; };
 		380A5C24C1914779ADFF2D93 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		420A39795C224181923152B0 /* NanumSquareRoundR.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = NanumSquareRoundR.ttf; path = ../assets/fonts/NanumSquareRoundR.ttf; sourceTree = "<group>"; };
+		420A39795C224181923152B0 /* NanumSquareRoundR.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NanumSquareRoundR.ttf; path = ../assets/fonts/NanumSquareRoundR.ttf; sourceTree = "<group>"; };
 		483E0716E1BE4856BB6CC8AC /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		4DE238C5C6E64A4683EAF4CF /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		5556FC9ABCB8446686888AF4 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
@@ -60,12 +61,13 @@
 		997CC881A7BD495CBBD6A7F2 /* Pods-Inception.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inception.debug.xcconfig"; path = "Target Support Files/Pods-Inception/Pods-Inception.debug.xcconfig"; sourceTree = "<group>"; };
 		9CB3E45037CE44A7A5568ABC /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		B10FE807DAE74BECB216154F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		C008BE52A2E845B6B7285913 /* NanumSquareRoundL.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = NanumSquareRoundL.ttf; path = ../assets/fonts/NanumSquareRoundL.ttf; sourceTree = "<group>"; };
+		C008BE52A2E845B6B7285913 /* NanumSquareRoundL.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NanumSquareRoundL.ttf; path = ../assets/fonts/NanumSquareRoundL.ttf; sourceTree = "<group>"; };
 		DD1F46ACA281432A900AB146 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		DDF78D76C246431699A05835 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		DE19DCE6DCB96C36F9B00E73 /* Pods-Inception.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inception.release.xcconfig"; path = "Target Support Files/Pods-Inception/Pods-Inception.release.xcconfig"; sourceTree = "<group>"; };
 		ECD9551E7D36DF2115D116DF /* libPods-Inception-InceptionTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Inception-InceptionTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F866B68D275E2DB500B2F48E /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		F8918EE9275724340030A280 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		FFF7431D706B482796B7CA00 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +170,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F866B68D275E2DB500B2F48E /* SplashScreen.storyboard */,
 				13B07FAE1A68108700A75B9A /* Inception */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* InceptionTests */,
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				F866B68E275E2DB500B2F48E /* SplashScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				73170C847D904E9C9EBF9555 /* NanumSquareRoundB.ttf in Resources */,
 				C07C8EF01FA140B1A0B458F5 /* NanumSquareRoundL.ttf in Resources */,
