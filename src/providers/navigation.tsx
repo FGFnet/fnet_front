@@ -2,13 +2,14 @@ import React from 'react';
 import { NavigationContainer, NavigationProp,  useNavigation as useNativeNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen, ChatScreen, NoticeScreen, RegisterScreen, RegisterListScreen } from '../screens';
+import { HomeScreen, ChatScreen, NoticeScreen, NoticeCreateScreen, RegisterScreen, RegisterListScreen } from '../screens';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export type ParamList = {
     Home: {};
     Chat: {};
     Notice: {};
+    NoticeCreate: {};
     Register: {};
     RegisterList: {};
 }
@@ -33,6 +34,7 @@ export function NavigationProvider() {
                 <Stack.Screen name="Chat" component={ChatScreen}/>
                 <Stack.Screen name="Notice" component={NoticeScreen}/>
                 <Stack.Screen name="Register" component={RegisterScreen}/>
+                <Stack.Screen name="NoticeCreate" component={NoticeCreateScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
-import {View, Image, StyleSheet, ScrollView} from 'react-native';
+import {View, Image, StyleSheet, ScrollView, Pressable} from 'react-native';
 import {Text, Divider, Button, List} from 'react-native-paper';
 import {Colors} from '../../constants';
 import { basicStyles } from '../../components';
+import {useNavigation} from '../../providers'
 
 export default function NoticeScreen() {
+    const navigation = useNavigation();
+
     return(
         <ScrollView>
             <View style={basicStyles.container}>
@@ -12,35 +15,25 @@ export default function NoticeScreen() {
                     <View style={{flex: 1, alignItems: 'flex-start'}}>
                         <Text style={[basicStyles.titleText, {fontSize: 22}]}> 공지사항 </Text>
                     </View>
-                    <Button uppercase={false}>
+                    <Button uppercase={false} onPress={()=>navigation.navigate('NoticeCreate')}>
                         <Text style={[basicStyles.titleText, {textAlign: 'right'}]}> +new </Text>
                     </Button>
                 </View>
 
                 <Divider/>
 
-                <View style={basicStyles.insideRowContainer}>
-                    <View style={styles.notice_title}>
-                        <Text style={styles.title_text}>
-                                공지합니다 하나 둘
-                        </Text>
-                        <Text style={styles.title_text}>
-                                조사합니다 하나 둘
-                        </Text>
-                        <Text style={styles.title_text}>
-                                문제있습니까 하나 둘
-                        </Text>
+                <View style={styles.notice_container}>
+                    <View style={styles.notice}>
+                        <Text style={styles.notice_title}>공지합니다 하나 둘</Text>
+                        <Text style={styles.notice_date}>3분전</Text>
                     </View>
-                    <View style={styles.notice_date}>
-                        <Text style={styles.date_text}>
-                            3분전
-                        </Text>
-                        <Text style={styles.date_text}>
-                            30분전
-                        </Text>
-                        <Text style={styles.date_text}>
-                            3시간전
-                        </Text>
+                    <View style={styles.notice}>
+                        <Text style={styles.notice_title}>공지합니다 하나 둘</Text>
+                        <Text style={styles.notice_date}>3분전</Text>
+                    </View>
+                    <View style={styles.notice}>
+                        <Text style={styles.notice_title}>공지합니다 하나 둘</Text>
+                        <Text style={styles.notice_date}>3분전</Text>
                     </View>
                 </View>
             </View>
@@ -55,22 +48,23 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 40,
     },
+    notice_container: {
+        padding: 20
+    },
+    notice: {
+        width: '100%',
+        flexDirection: 'row',
+        marginBottom: 20,
+        justifyContent: 'space-between'
+    },
     notice_title:{
-        flex: 2
-    },
-    notice_date:{
-        flex: 1
-    },
-    title_text: {
         fontSize: 16,
         color: Colors.darker,
         fontWeight: 'bold',
-        marginBottom: 20
     },
-    date_text:{
+    notice_date:{
         textAlign: 'right',
         color: Colors.light,
         fontSize: 16,
-        marginBottom: 20
     }
 });
