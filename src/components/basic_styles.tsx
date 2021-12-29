@@ -18,8 +18,10 @@ export const basicStyles = StyleSheet.create({
     contentText: {
         marginBottom: 8,
     },
+    insideContainer: {
+        padding: 20
+    },
     insideRowContainer: {
-        flex: 1,
         flexDirection: 'row',
         padding: 20,
     },
