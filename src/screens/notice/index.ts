@@ -1,3 +1,4 @@
 import NoticeScreen from "./notice";
+import NoticeCreateScreen from "./noticeCreate";
 
-export default NoticeScreen;
+export {NoticeScreen, NoticeCreateScreen};
