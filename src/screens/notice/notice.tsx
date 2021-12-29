@@ -23,18 +23,27 @@ export default function NoticeScreen() {
                 <Divider/>
 
                 <View style={styles.notice_container}>
-                    <View style={styles.notice}>
+                    <Pressable 
+                        style={styles.notice}
+                        onPress={()=>navigation.navigate('NoticeDetail')}    
+                    >
                         <Text style={styles.notice_title}>공지합니다 하나 둘</Text>
                         <Text style={styles.notice_date}>3분전</Text>
-                    </View>
-                    <View style={styles.notice}>
+                    </Pressable>
+                    <Pressable 
+                        style={styles.notice}
+                        onPress={()=>navigation.navigate('NoticeDetail')}    
+                    >
                         <Text style={styles.notice_title}>공지합니다 하나 둘</Text>
                         <Text style={styles.notice_date}>3분전</Text>
-                    </View>
-                    <View style={styles.notice}>
+                    </Pressable>
+                    <Pressable 
+                        style={styles.notice}
+                        onPress={()=>navigation.navigate('NoticeDetail')}    
+                    >
                         <Text style={styles.notice_title}>공지합니다 하나 둘</Text>
                         <Text style={styles.notice_date}>3분전</Text>
-                    </View>
+                    </Pressable>
                 </View>
             </View>
         </ScrollView>
