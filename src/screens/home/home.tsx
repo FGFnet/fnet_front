@@ -22,6 +22,13 @@ export default function HomeScreen() {
                         <Text style={basicStyles.contentText}>2/14 진행 LC  LC09</Text>
                         <Text>LC09 접수 인원  15</Text>
                     </View>
+                    <Button
+                        icon="settings-outline"
+                        onPress={() => {
+                            navigation.navigate('Setting', {})
+                        }}
+                    >
+                    </Button>
                 </View>
                 <Divider/>
                 <View style={styles.body}>
@@ -46,7 +53,7 @@ export default function HomeScreen() {
                     </Button>
                 </View>
                 <View style={styles.body}>
-                    <Button 
+                    <Button
                         icon="md-document-text-outline"
                         contentStyle={styles.button}
                         labelStyle={{fontSize: 30}}
@@ -56,7 +63,7 @@ export default function HomeScreen() {
                     >
                         <Text style={{fontSize: 14, color: Colors.primary}}>Notice</Text>
                     </Button>
-                    <Button 
+                    <Button
                         icon="folder-open-outline"
                         contentStyle={styles.button}
                         labelStyle={{fontSize: 30}}

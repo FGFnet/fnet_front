@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer, NavigationProp,  useNavigation as useNativeNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen, ChatScreen, NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, RegisterScreen, RegisterListScreen } from '../screens';
+import { HomeScreen, ChatScreen, NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, RegisterScreen, RegisterListScreen, , SettingScreen, SetScheduleScreen, FGListScreen, FreshmenListScreen } from '../screens';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export type ParamList = {
@@ -13,6 +13,10 @@ export type ParamList = {
     NoticeCreate: {};
     Register: {};
     RegisterList: {};
+    Setting: {};
+    SetSchedule: {};
+    FGList: {};
+    FreshmenList: {};
 }
 
 export const useNavigation = () => {
@@ -37,6 +41,10 @@ export function NavigationProvider() {
                 <Stack.Screen name="Register" component={RegisterScreen}/>
                 <Stack.Screen name="NoticeDetail" component={NoticeDetailScreen}/>
                 <Stack.Screen name="NoticeCreate" component={NoticeCreateScreen}/>
+                <Stack.Screen name="Setting" component={SettingScreen}/>
+                <Stack.Screen name="SetSchedule" component={SetScheduleScreen}/>
+                <Stack.Screen name="FGList" component={FGListScreen}/>
+                <Stack.Screen name="FreshmenList" component={FreshmenListScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
