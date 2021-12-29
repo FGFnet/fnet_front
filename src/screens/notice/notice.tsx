@@ -12,7 +12,7 @@ export default function NoticeScreen() {
                     <View style={{flex: 1, alignItems: 'flex-start'}}>
                         <Text style={[basicStyles.titleText, {fontSize: 22}]}> 공지사항 </Text>
                     </View>
-                    <Button>
+                    <Button uppercase={false}>
                         <Text style={[basicStyles.titleText, {textAlign: 'right'}]}> +new </Text>
                     </Button>
                 </View>
