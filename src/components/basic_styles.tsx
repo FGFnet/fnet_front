@@ -22,5 +22,8 @@ export const basicStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         padding: 20,
+    },
+    paperTable: {
+        height: 450,
     }
 })
