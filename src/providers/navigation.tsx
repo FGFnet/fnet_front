@@ -2,11 +2,12 @@ import React from 'react';
 import { NavigationContainer, NavigationProp,  useNavigation as useNativeNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen, ChatScreen, NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, RegisterScreen, RegisterListScreen, SettingScreen, SetScheduleScreen, FGListScreen, FreshmenListScreen } from '../screens';
+import { HomeScreen, ChatScreen, NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, RegisterScreen, RegisterListScreen, SettingScreen, SetScheduleScreen, FGListScreen, FreshmenListScreen, LoginScreen } from '../screens';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export type ParamList = {
     Home: {};
+    Login: {};
     Chat: {};
     Notice: {};
     NoticeDetail: {};
@@ -45,6 +46,7 @@ export function NavigationProvider() {
                 <Stack.Screen name="SetSchedule" component={SetScheduleScreen}/>
                 <Stack.Screen name="FGList" component={FGListScreen}/>
                 <Stack.Screen name="FreshmenList" component={FreshmenListScreen}/>
+                <Stack.Screen name="Login" component={LoginScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

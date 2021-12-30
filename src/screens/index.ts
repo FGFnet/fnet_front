@@ -4,3 +4,4 @@ export {NoticeScreen, NoticeDetailScreen, NoticeCreateScreen} from './notice';
 export {default as RegisterListScreen} from './registerList';
 export {default as RegisterScreen} from './register';
 export {SettingScreen, SetScheduleScreen, FGListScreen, FreshmenListScreen} from './setting'
+export {default as LoginScreen} from './login';
