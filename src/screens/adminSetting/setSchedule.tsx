@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { Text, Divider } from 'react-native-paper';
 import { Colors } from '../../constants'
-import { basicStyles } from '../../components';
+import { basicStyles, StyledDivider, Header } from '../../components';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 Date.prototype.format = function(f) {
@@ -52,12 +52,10 @@ export default function SetScheduleScreen() {
 
     return(
         <ScrollView>
-            <View style={styles.wrapper}>
-                <View style={styles.header}>
-                    <Text style={basicStyles.titleText}>OT Schedule</Text>
-                </View>
-                <Divider/>
-                <View style={styles.container}>
+            <View style={basicStyles.container}>
+                <Header title='OT Schedule'/>
+                <StyledDivider/>
+                <View style={basicStyles.insideRowContainer}>
                     <Text style={styles.label}>첫째날</Text>
                     <TouchableOpacity onPress={showDatePicker}>
                         <TextInput
@@ -75,7 +73,7 @@ export default function SetScheduleScreen() {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={styles.container}>
+                <View style={basicStyles.insideRowContainer}>
                     <Text style={styles.label}>둘째날</Text>
                     <TouchableOpacity onPress={showDatePicker}>
                         <TextInput
@@ -93,7 +91,7 @@ export default function SetScheduleScreen() {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={styles.container}>
+                <View style={basicStyles.insideRowContainer}>
                     <Text style={styles.label}>셋째날</Text>
                     <TouchableOpacity onPress={showDatePicker}>
                         <TextInput

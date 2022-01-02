@@ -8,59 +8,17 @@ import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import {Colors} from '../constants';
 
 const fontConfig = {
-  web: {
-    regular: {
-      fontFamily: 'NanumSquareRoundB',
-      fontWeight: 'normal'
-    },
-    medium: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'normal'
-    },
-    light: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'bold'
-    },
-    thin: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'normal'
-    }
+  regular: {
+    fontFamily: 'NanumSquareRoundB',
   },
-  ios: {
-    regular: {
-      fontFamily: 'NanumSquareRoundB',
-      fontWeight: 'normal'
-    },
-    medium: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'normal'
-    },
-    light: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'bold'
-    },
-    thin: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'normal'
-    }
+  medium: {
+    fontFamily: 'NanumSquareRoundL',
   },
-  android: {
-    regular: {
-      fontFamily: 'NanumSquareRoundB',
-      fontWeight: 'normal'
-    },
-    medium: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'normal'
-    },
-    light: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'bold'
-    },
-    thin: {
-      fontFamily: 'NanumSquareRoundL',
-      fontWeight: 'normal'
-    }
+  light: {
+    fontFamily: 'NanumSquareRoundL',
+  },
+  thin: {
+    fontFamily: 'NanumSquareRoundL',
   }
 }
 
@@ -74,7 +32,7 @@ const theme = {
     text: Colors.darker,
     placeHolder: Colors.light
   },
-  fonts: configureFonts(fontConfig),
+  fonts: fontConfig
 };
 
 export function PaperProvider({children}: {children: React.ReactNode}) {

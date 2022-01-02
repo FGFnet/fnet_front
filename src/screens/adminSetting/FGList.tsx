@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Divider, DataTable, TextInput } from 'react-native-paper';
-import { basicStyles } from '../../components';
+import { Divider, DataTable, TextInput } from 'react-native-paper';
+import { basicStyles, Header } from '../../components';
 import { Colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -32,40 +32,36 @@ export default function FGListScreen() {
 
     return(
         <ScrollView>
-        <View style={styles.wrapper}>
-                <View style={styles.header}>
-                    <View style={styles.header_title}>
-                        <Text style={basicStyles.titleText}>FG List</Text>
-                    </View>
-                    <View style={styles.header_searchbar}>
-                        <TextInput
-                            style={styles.input}
+            <View style={styles.header}>
+                <Header title='FG List'/>
+                <View style={styles.header_searchbar}>
+                    <TextInput
+                        style={styles.input}
 
-                        />
-                        <Icon
-                            style={styles.input_icon}
-                            name="search-outline"
-                            color={Colors.light}
-                            size={18}
-                        >
-                        </Icon>
-                    </View>
+                    />
+                    <Icon
+                        style={styles.input_icon}
+                        name="search-outline"
+                        color={Colors.light}
+                        size={18}
+                    >
+                    </Icon>
                 </View>
-                <Divider/>
-                <View>
-                    <DataTable style={basicStyles.paperTable}>
-                        <DataTable.Header>
-                            <DataTable.Title>이름</DataTable.Title>
-                            <DataTable.Title>학번</DataTable.Title>
-                            <DataTable.Title numeric>LC1</DataTable.Title>
-                            <DataTable.Title numeric>LC2</DataTable.Title>
-                            <DataTable.Title numeric>LC3</DataTable.Title>
-                        </DataTable.Header>
-                        <ScrollView>
-                            {tableBody}
-                        </ScrollView>
-                    </DataTable>
-                </View>
+            </View>
+            <Divider/>
+            <View>
+                <DataTable style={basicStyles.paperTable}>
+                    <DataTable.Header>
+                        <DataTable.Title>이름</DataTable.Title>
+                        <DataTable.Title>학번</DataTable.Title>
+                        <DataTable.Title numeric>LC1</DataTable.Title>
+                        <DataTable.Title numeric>LC2</DataTable.Title>
+                        <DataTable.Title numeric>LC3</DataTable.Title>
+                    </DataTable.Header>
+                    <ScrollView>
+                        {tableBody}
+                    </ScrollView>
+                </DataTable>
             </View>
         </ScrollView>
     )

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { Text, Divider, List } from 'react-native-paper';
+import { List } from 'react-native-paper';
 import { Colors } from '../../constants'
-import { basicStyles } from '../../components';
+import { basicStyles, Header, StyledDivider } from '../../components';
 import {useNavigation} from '../../providers';
 
 export default function SettingScreen() {
@@ -10,11 +10,9 @@ export default function SettingScreen() {
 
     return(
         <ScrollView>
-            <View style={styles.wrapper}>
-                <View style={styles.header}>
-                    <Text style={basicStyles.titleText}>설정</Text>
-                </View>
-                <Divider/>
+            <View style={basicStyles.container}>
+                <Header title='설정'/>
+                <StyledDivider/>
                 <List.Section style={styles.list}>
                     <TouchableOpacity
                         onPress={() => {
@@ -53,26 +51,15 @@ export default function SettingScreen() {
 }
 
 const styles = StyleSheet.create({
-    wrapper: {
-        flex: 1,
-    },
-    header: {
-        flex: 1,
-        alignItems: 'flex-start',
-        paddingTop: 40,
-        paddingLeft: 40,
-        paddingBottom: 20
-    },
     list: {
         flex: 1,
-        paddingHorizontal: 40
+        width: '100%'
     },
     list_item: {
         borderBottomWidth: 1,
         borderBottomColor: Colors.light
     },
     list_item_title: {
-        fontSize: 14,
         color: Colors.darker
     }
 });

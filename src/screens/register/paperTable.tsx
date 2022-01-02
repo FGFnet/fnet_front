@@ -1,7 +1,8 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, Platform} from 'react-native';
 import {DataTable, IconButton} from 'react-native-paper';
-import {basicStyles} from '../../components/basic_styles'
+import {basicStyles} from '../../components/basic_styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function PaperTable(props) {
   var data = props.data
@@ -34,13 +35,22 @@ export default function PaperTable(props) {
         Object.keys(data[0]).map((title) =>
           <DataTable.Cell key={title}>
             {
-              checkboxKey === title ? <IconButton 
-                                        size={18}
-                                        icon={val[title] ? 
-                                        "heart-outline" : "heart-dislike-outline"}
-                                        onPress={() => props.toggleFunc(val['id'])}
-                                      >
-                                      </IconButton> :
+              checkboxKey === title ? 
+                (Platform.OS === "ios" ? 
+                  <Icon 
+                    size={18}
+                    name={val[title] ? 
+                    "heart-outline" : "heart-dislike-outline"}
+                    onPress={() => props.toggleFunc(val['id'])}
+                  >
+                  </Icon> : 
+                  <IconButton 
+                    size={18}
+                    icon={val[title] ? 
+                    "heart-outline" : "heart-dislike-outline"}
+                    onPress={() => props.toggleFunc(val['id'])}
+                  ></IconButton>
+                ) :
               title in val ? val[title] : null
             }
           </DataTable.Cell>
@@ -54,7 +64,7 @@ export default function PaperTable(props) {
       <DataTable.Header>
         {tableHeader}
       </DataTable.Header>
-      <ScrollView>
+      <ScrollView nestedScrollEnabled = {true}>
         {tableBody}
       </ScrollView>
     </DataTable>

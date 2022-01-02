@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Image, StyleSheet, ScrollView} from 'react-native';
-import {Text, Divider, Button, IconButton} from 'react-native-paper';
+import {Text, Divider, Button,} from 'react-native-paper';
 import {Colors} from '../../constants';
-import { basicStyles } from '../../components';
+import { basicStyles, Header } from '../../components';
 import {useNavigation} from '../../providers';
 
 export default function HomeScreen() {
@@ -11,6 +11,14 @@ export default function HomeScreen() {
     return(
         <ScrollView>
             <View style={styles.wrapper}>
+                <Button
+                    style={{position: 'absolute', top:0, right:0, zIndex: 1}}
+                    icon="settings-outline"
+                    onPress={() => {
+                        navigation.navigate('Setting', {})
+                    }}
+                >
+                </Button>
                 <View style={styles.header}>
                     <Image
                         source={require('../../images/fg_two.png')}
@@ -18,18 +26,12 @@ export default function HomeScreen() {
                         resizeMode='contain'
                     />
                     <View style={styles.header_fgInfo}>
-                        <Text style={basicStyles.titleText}>김하늘 FG</Text>
+                        <Text style={styles.headerFgName}>김하늘 FG</Text>
                         <Text style={basicStyles.contentText}>2/14 진행 LC  LC09</Text>
                         <Text>LC09 접수 인원  15</Text>
                     </View>
-                    <Button
-                        icon="settings-outline"
-                        onPress={() => {
-                            navigation.navigate('Setting', {})
-                        }}
-                    >
-                    </Button>
                 </View>
+                
                 <Divider/>
                 <View style={styles.body}>
                     <Button icon="people-outline"
@@ -76,7 +78,7 @@ export default function HomeScreen() {
                 </View>
                 <Divider/>
                 <View style={basicStyles.container}>
-                    <Text style={basicStyles.titleText}> OT Schedule </Text>
+                    <Header title='OT Schedule'/>
                     <View style={basicStyles.insideRowContainer}>
                         <View style={styles.schedule_date}>
                             <Text style={basicStyles.contentText}>
@@ -116,6 +118,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         paddingBottom: 20,
+    },
+    headerFgName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        backgroundColor: Colors.accent,
+        paddingLeft: 5,
+        paddingRight: 14,
     },
     header_fgInfo: {
         paddingLeft: 20,

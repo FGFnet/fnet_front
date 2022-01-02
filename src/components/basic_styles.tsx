@@ -1,31 +1,31 @@
 import {Colors} from '../constants';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const screenSize = Dimensions.get('screen')
 
 export const basicStyles = StyleSheet.create({
     container: {
-        padding: 40,
+        margin: '10%',
         flex: 1,
         alignItems: 'flex-start'
-    },
-    titleText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        backgroundColor: Colors.accent,
-        paddingLeft: 5,
-        paddingRight: 14,
     },
     contentText: {
         marginBottom: 8,
     },
     insideContainer: {
-        padding: 20
+        padding: '5%'
     },
     insideRowContainer: {
         flexDirection: 'row',
-        padding: 20,
+        padding: '5%',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     paperTable: {
-        height: 450,
+        height: screenSize.height * 0.6,
+    },
+    lightText: {
+        color: Colors.light,
+        fontSize: 10
     }
 })

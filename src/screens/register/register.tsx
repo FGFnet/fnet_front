@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import { Text, Divider, TextInput } from 'react-native-paper';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Header, InputForm } from '../../components';
 import {basicStyles} from '../../components/basic_styles'
 import { Colors } from '../../constants';
 import PaperTable from './paperTable';
@@ -69,83 +69,53 @@ export default function RegisterScreen() {
     }
 
     return(
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.header__title}>
-                    <Text style={basicStyles.titleText}>접수</Text>
+        <ScrollView nestedScrollEnabled = {true}>
+            <View style={basicStyles.container}>
+                <View style={styles.header}>
+                    <Header title='접수' marginBottom={0}/>
+                    <View style={styles.searchBar}>
+                        <InputForm
+                            style={{width: '80%'}}
+                            height={35}
+                            value={searchQuery}
+                            onChangeText={onChangeSearch}
+                        />
+                        <Icon
+                            style={styles.inputIcon}
+                            name="search-outline"
+                            color={Colors.light}
+                            size={18}
+                        />
+                    </View>
                 </View>
-                <View style={styles.header__search_bar}>
-                    <TextInput
-                        style={styles.input}
-                        value={searchQuery}
-                        onChangeText={onChangeSearch}
-                        underlineColorAndroid="transparent"
-                    >
-                    </TextInput>
-                    <Icon
-                        style={styles.input__icon}
-                        name="search-outline"
-                        color={Colors.light}
-                        size={18}
-                    >
-                    </Icon>
-                </View>
+
+                <View style={{width: '100%'}}>
+                    <PaperTable
+                        header={tableHeader}
+                        data={tableData}
+                        checkboxKey={checkboxKey}
+                        toggleFunc={Register}
+                    />
+                </View>   
             </View>
-            <Divider style={{marginBottom: 16}}/>
-            <View style={styles.body}>
-                <PaperTable
-                    header={tableHeader}
-                    data={tableData}
-                    checkboxKey={checkboxKey}
-                    toggleFunc={Register}
-                />
-            </View>   
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20
-    },
     header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 30
+    },
+    searchBar: {
         flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    header__title: {
-        flex: 1.5,
-        marginTop: 50,
-        alignItems: 'center',
-    },
-    header__search_bar: {
-        flex: 3,
-        marginTop: 40,
         alignItems: 'center',
         flexDirection: 'row',
+        justifyContent: 'flex-end'
     },
-    input: {
-        width: 180,
-        height: 28,
-        marginLeft: 40,
-        fontSize:12,
-        backgroundColor: '#FFF',
-        borderWidth: 1,
-        borderColor: Colors.dark,
-        borderBottomEndRadius: 6,
-        borderTopStartRadius: 6,
-        borderBottomStartRadius: 6,
-        borderTopEndRadius: 6
-    },
-    input__icon: {
+    inputIcon: {
         position: 'absolute',
-        left: 195
+        paddingRight: 10
     },
-    body: {
-        flex: 5
-    },
-    row: {
-        borderBottomWidth: 0
-    }
 });
