@@ -20,6 +20,8 @@ function InputForm(props) {
                 onChangeText={props.onChangeText}
                 mode='outlined'
                 outlineColor= {Colors.primary_lighter}
+                editable={props.editable}
+                pointerEvents={props.pointerEvents}
             />
         </View>
     );

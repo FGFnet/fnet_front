@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Image, StyleSheet, ScrollView} from 'react-native';
-import {Text, Divider, Button,} from 'react-native-paper';
+import {Text, Button, Divider} from 'react-native-paper';
 import {Colors} from '../../constants';
-import { basicStyles, Header } from '../../components';
+import { basicStyles, GreenButton, Header } from '../../components';
 import {useNavigation} from '../../providers';
 
 export default function HomeScreen() {
@@ -10,98 +10,108 @@ export default function HomeScreen() {
 
     return(
         <ScrollView>
-            <View style={styles.wrapper}>
-                <Button
-                    style={{position: 'absolute', top:0, right:0, zIndex: 1}}
-                    icon="settings-outline"
+            <Button
+                style={{position: 'absolute', bottom:0, right:0, zIndex: 1}}
+                icon="settings-outline"
+                onPress={() => {
+                    navigation.navigate('Setting', {})
+                }}
+            >admin</Button>
+            
+            <View style={styles.header}>
+                <Image
+                    source={require('../../images/fg_two.png')}
+                    style={{height: 170, width: 200}}
+                    resizeMode='contain'
+                />
+                <View style={styles.headerFgInfo}>
+                    <Text style={styles.headerFgName}>김하늘 FG</Text>
+                    <Text style={basicStyles.contentText}>2/14 진행 LC  LC09</Text>
+                    <Text>LC09 접수 인원  15</Text>
+                </View>
+            </View>
+            
+            <Divider/>
+            <View style={styles.body}>
+                <Button icon="people-outline"
+                    contentStyle={styles.button}
+                    labelStyle={{fontSize: 30}}
                     onPress={() => {
-                        navigation.navigate('Setting', {})
+                        navigation.navigate('RegisterList', {});
                     }}
                 >
+                    <Text style={{fontSize: 14, color: Colors.primary}}>LC 09</Text>
                 </Button>
-                <View style={styles.header}>
-                    <Image
-                        source={require('../../images/fg_two.png')}
-                        style={{height: 170, width: 200}}
-                        resizeMode='contain'
-                    />
-                    <View style={styles.header_fgInfo}>
-                        <Text style={styles.headerFgName}>김하늘 FG</Text>
-                        <Text style={basicStyles.contentText}>2/14 진행 LC  LC09</Text>
-                        <Text>LC09 접수 인원  15</Text>
+                <Button
+                    icon="chatbubbles-outline"
+                    contentStyle={styles.button}
+                    labelStyle={{fontSize: 30}}
+                    onPress={() => {
+                        navigation.navigate('Chat', {});
+                    }}
+                >
+                    <Text style={{fontSize: 14, color: Colors.primary}}>Chat</Text>
+                </Button>
+            </View>
+            <View style={styles.body}>
+                <Button
+                    icon="md-document-text-outline"
+                    contentStyle={styles.button}
+                    labelStyle={{fontSize: 30}}
+                    onPress={() => {
+                        navigation.navigate('Notice', {});
+                    }}
+                >
+                    <Text style={{fontSize: 14, color: Colors.primary}}>Notice</Text>
+                </Button>
+                <Button
+                    icon="folder-open-outline"
+                    contentStyle={styles.button}
+                    labelStyle={{fontSize: 30}}
+                    onPress={() => {
+                        navigation.navigate('Register', {});
+                    }}
+                >
+                    <Text style={{fontSize: 14, color: Colors.primary}}>Register</Text>
+                </Button>
+            </View>
+            <Divider/>
+
+            <View style={basicStyles.container}>
+                <View style={styles.scheduleHeader}>
+                    <Header title='OT Schedule' marginBottom={0}/>
+                    <Button
+                        icon="settings-outline"
+                        onPress={() => {
+                            navigation.navigate('LCSetting')
+                        }}
+                    > </Button>
+                </View>
+                <View style={basicStyles.insideContainer}>
+                    <View style={styles.schedule}>
+                        <Text style={{paddingRight: 20}}>
+                            2021.02.14
+                        </Text>
+                        <GreenButton
+                            text='LC09'
+                            press={()=>alert('LC09')}
+                        />
                     </View>
-                </View>
-                
-                <Divider/>
-                <View style={styles.body}>
-                    <Button icon="people-outline"
-                        contentStyle={styles.button}
-                        labelStyle={{fontSize: 30}}
-                        onPress={() => {
-                            navigation.navigate('RegisterList', {});
-                        }}
-                    >
-                        <Text style={{fontSize: 14, color: Colors.primary}}>LC 09</Text>
-                    </Button>
-                    <Button
-                        icon="chatbubbles-outline"
-                        contentStyle={styles.button}
-                        labelStyle={{fontSize: 30}}
-                        onPress={() => {
-                            navigation.navigate('Chat', {});
-                        }}
-                    >
-                        <Text style={{fontSize: 14, color: Colors.primary}}>Chat</Text>
-                    </Button>
-                </View>
-                <View style={styles.body}>
-                    <Button
-                        icon="md-document-text-outline"
-                        contentStyle={styles.button}
-                        labelStyle={{fontSize: 30}}
-                        onPress={() => {
-                            navigation.navigate('Notice', {});
-                        }}
-                    >
-                        <Text style={{fontSize: 14, color: Colors.primary}}>Notice</Text>
-                    </Button>
-                    <Button
-                        icon="folder-open-outline"
-                        contentStyle={styles.button}
-                        labelStyle={{fontSize: 30}}
-                        onPress={() => {
-                            navigation.navigate('Register', {});
-                        }}
-                    >
-                        <Text style={{fontSize: 14, color: Colors.primary}}>Register</Text>
-                    </Button>
-                </View>
-                <Divider/>
-                <View style={basicStyles.container}>
-                    <Header title='OT Schedule'/>
-                    <View style={basicStyles.insideRowContainer}>
-                        <View style={styles.schedule_date}>
-                            <Text style={basicStyles.contentText}>
-                                2021.02.14
-                            </Text>
-                            <Text style={basicStyles.contentText}>
-                                2021.02.15
-                            </Text>
-                            <Text style={basicStyles.contentText}>
-                                2021.02.16
-                            </Text>
-                        </View>
-                        <View style={styles.schedule_LC}>
-                            <Text style={basicStyles.contentText}>
-                                LC 09
-                            </Text>
-                            <Text style={basicStyles.contentText}>
-                                LC 57
-                            </Text>
-                            <Text style={basicStyles.contentText}>
-                                LC 88
-                            </Text>
-                        </View>
+                    <View style={styles.schedule}>
+                        <Text style={{paddingRight: 20}}>
+                            2021.02.15
+                        </Text>
+                        <GreenButton
+                            text='LC57'
+                        />
+                    </View>
+                    <View style={styles.schedule}>
+                        <Text style={{paddingRight: 20}}>
+                            2021.02.16
+                        </Text>
+                        <GreenButton
+                            text='LC88'
+                        />
                     </View>
                 </View>
             </View>
@@ -110,9 +120,6 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-    wrapper: {
-        flex:1,
-    },
     header: {
         flex: 1,
         alignItems: 'center',
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 14,
     },
-    header_fgInfo: {
+    headerFgInfo: {
         paddingLeft: 20,
         alignItems: 'center'
     },
@@ -146,10 +153,13 @@ const styles = StyleSheet.create({
         width: 150,
         alignItems: 'center',
     },
-    schedule_date: {
-        flex: 1
+    scheduleHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10
     },
-    schedule_LC: {
-        flex: 1
+    schedule:{
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 });

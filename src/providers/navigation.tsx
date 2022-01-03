@@ -2,7 +2,12 @@ import React from 'react';
 import { NavigationContainer, NavigationProp,  useNavigation as useNativeNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen, ChatScreen, NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, RegisterScreen, RegisterListScreen, SettingScreen, SetScheduleScreen, FGListScreen, FreshmenListScreen, LoginScreen } from '../screens';
+import { HomeScreen, ChatScreen, 
+    NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, 
+    RegisterScreen, RegisterListScreen, SettingScreen, 
+    SetScheduleScreen, FGListScreen, FreshmenListScreen, 
+    LoginScreen, LCSettingScreen 
+} from '../screens';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export type ParamList = {
@@ -18,6 +23,7 @@ export type ParamList = {
     SetSchedule: {};
     FGList: {};
     FreshmenList: {};
+    LCSetting: {};
 }
 
 export const useNavigation = () => {
@@ -47,6 +53,7 @@ export function NavigationProvider() {
                 <Stack.Screen name="FGList" component={FGListScreen}/>
                 <Stack.Screen name="FreshmenList" component={FreshmenListScreen}/>
                 <Stack.Screen name="Login" component={LoginScreen}/>
+                <Stack.Screen name="LCSetting" component={LCSettingScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
