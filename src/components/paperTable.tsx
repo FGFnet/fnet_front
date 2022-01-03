@@ -1,7 +1,7 @@
 import React from 'react';
-import {ScrollView, Platform} from 'react-native';
+import {ScrollView, Platform, StyleSheet} from 'react-native';
 import {DataTable, IconButton} from 'react-native-paper';
-import {basicStyles} from '../../components/basic_styles';
+import {basicStyles} from './basic_styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function PaperTable(props) {
@@ -13,7 +13,7 @@ export default function PaperTable(props) {
   if (header === null) return null
 
   var tableHeader = header.map((title) => 
-    <DataTable.Title key={title}>
+    <DataTable.Title key={title} style={{justifyContent: 'center'}}>
       {title}
     </DataTable.Title>
   )
@@ -33,7 +33,7 @@ export default function PaperTable(props) {
     <DataTable.Row key={val['id']}>
       {
         Object.keys(data[0]).map((title) =>
-          <DataTable.Cell key={title}>
+          <DataTable.Cell key={title} style={{justifyContent: 'center'}}>
             {
               checkboxKey === title ? 
                 (Platform.OS === "ios" ? 
@@ -70,3 +70,9 @@ export default function PaperTable(props) {
     </DataTable>
   )
 }
+
+const styles = StyleSheet.create({
+  cell: {
+    justifyContent: 'center'
+  }
+});

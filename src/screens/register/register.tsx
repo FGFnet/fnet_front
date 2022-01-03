@@ -1,10 +1,9 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Header, InputForm } from '../../components';
+import { Header, InputForm, PaperTable } from '../../components';
 import {basicStyles} from '../../components/basic_styles'
 import { Colors } from '../../constants';
-import PaperTable from './paperTable';
 
 export default function RegisterScreen() {
     const tableHeader = ['#', '이름', '전화번호', 'LC', '접수']

@@ -1,9 +1,25 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView, ImageBackground} from 'react-native';
-import {Text, DataTable} from 'react-native-paper';
-import { basicStyles, Header, StyledDivider } from '../../components';
+import {Text} from 'react-native-paper';
+import { basicStyles, Header, PaperTable, StyledDivider } from '../../components';
 
 export default function RegisterListScreen() {
+    const tableHeader = ['#', '이름', '성별', '계열', '접수 여부']
+    const lcList = [
+        {'id': '1', 'name': '박민서', 'sex': '여', 'department': '자연과학', 'register': 'O'},
+        {'id': '2', 'name': '하솔비', 'sex': '여', 'department': '자연과학', 'register': 'X'},
+        {'id': '3', 'name': '김학산', 'sex': '여', 'department': '전전컴', 'register': 'X'},
+        {'id': '4', 'name': '구성현', 'sex': '여', 'department': '자연과학', 'register': 'O'},
+        {'id': '5', 'name': '하지민', 'sex': '여', 'department': '공학', 'register': 'O'},
+        {'id': '6', 'name': '고양이', 'sex': '여', 'department': '사회과학', 'register': 'X'},
+        {'id': '7', 'name': '고양이', 'sex': '여', 'department': '인문사회', 'register': 'X'},
+        {'id': '8', 'name': '고양이', 'sex': '여', 'department': '자연과학', 'register': 'X'},
+        {'id': '9', 'name': '고양이', 'sex': '여', 'department': '자연과학', 'register': 'X'},
+        {'id': '10', 'name': '고양이', 'sex': '여', 'department': '자연과학', 'register': 'X'},
+        {'id': '11', 'name': '고양이', 'sex': '여', 'department': '자연과학', 'register': 'X'}
+    ]
+    const [tableData, updateTableData] = React.useState(lcList)
+
     return(
         <ScrollView nestedScrollEnabled = {true}>
             <View style={basicStyles.container}>
@@ -34,75 +50,10 @@ export default function RegisterListScreen() {
                     </View>
                 </View>
                 <StyledDivider/>
-                <ScrollView nestedScrollEnabled = {true} horizontal={true} contentContainerStyle={styles.table}>
-                    <DataTable style={styles.table}>
-                        <DataTable.Header>
-                            <DataTable.Title>#</DataTable.Title>
-                            <DataTable.Title>이름</DataTable.Title>
-                            <DataTable.Title>성별</DataTable.Title>
-                            <DataTable.Title>계열</DataTable.Title>
-                            <DataTable.Title numeric>접수 여부</DataTable.Title>
-                        </DataTable.Header>
-                        <ScrollView nestedScrollEnabled = {true}>
-                            <DataTable.Row>
-                                <DataTable.Cell>1</DataTable.Cell>
-                                <DataTable.Cell>박민서</DataTable.Cell>
-                                <DataTable.Cell>여</DataTable.Cell>
-                                <DataTable.Cell>자연과학</DataTable.Cell>
-                                <DataTable.Cell numeric>O</DataTable.Cell>
-                            </DataTable.Row>
-                            <DataTable.Row>
-                                <DataTable.Cell>2</DataTable.Cell>
-                                <DataTable.Cell>하솔비</DataTable.Cell>
-                                <DataTable.Cell>여</DataTable.Cell>
-                                <DataTable.Cell>자연과학</DataTable.Cell>
-                                <DataTable.Cell numeric>X</DataTable.Cell>
-                            </DataTable.Row>
-                            <DataTable.Row>
-                                <DataTable.Cell>3</DataTable.Cell>
-                                <DataTable.Cell>김학산</DataTable.Cell>
-                                <DataTable.Cell>남</DataTable.Cell>
-                                <DataTable.Cell>전전컴</DataTable.Cell>
-                                <DataTable.Cell numeric>X</DataTable.Cell>
-                            </DataTable.Row>
-                            <DataTable.Row>
-                                <DataTable.Cell>4</DataTable.Cell>
-                                <DataTable.Cell>구성현</DataTable.Cell>
-                                <DataTable.Cell>여</DataTable.Cell>
-                                <DataTable.Cell>자연과학</DataTable.Cell>
-                                <DataTable.Cell numeric>O</DataTable.Cell>
-                            </DataTable.Row>
-                            <DataTable.Row>
-                                <DataTable.Cell>5</DataTable.Cell>
-                                <DataTable.Cell>고양이</DataTable.Cell>
-                                <DataTable.Cell>중성</DataTable.Cell>
-                                <DataTable.Cell>먀아아옹</DataTable.Cell>
-                                <DataTable.Cell numeric>X</DataTable.Cell>
-                            </DataTable.Row>
-                            <DataTable.Row>
-                                <DataTable.Cell>6</DataTable.Cell>
-                                <DataTable.Cell>고양이</DataTable.Cell>
-                                <DataTable.Cell>중성</DataTable.Cell>
-                                <DataTable.Cell>먀아아옹</DataTable.Cell>
-                                <DataTable.Cell numeric>X</DataTable.Cell>
-                            </DataTable.Row>
-                            <DataTable.Row>
-                                <DataTable.Cell>7</DataTable.Cell>
-                                <DataTable.Cell>고양이</DataTable.Cell>
-                                <DataTable.Cell>중성</DataTable.Cell>
-                                <DataTable.Cell>먀아아옹</DataTable.Cell>
-                                <DataTable.Cell numeric>X</DataTable.Cell>
-                            </DataTable.Row>
-                            <DataTable.Row>
-                                <DataTable.Cell>8</DataTable.Cell>
-                                <DataTable.Cell>고양이</DataTable.Cell>
-                                <DataTable.Cell>중성</DataTable.Cell>
-                                <DataTable.Cell>먀아아옹</DataTable.Cell>
-                                <DataTable.Cell numeric>X</DataTable.Cell>
-                            </DataTable.Row>
-                        </ScrollView>
-                    </DataTable>
-                </ScrollView>
+                <PaperTable
+                    header={tableHeader}
+                    data={tableData}
+                />
             </View>
         </ScrollView>
     )

@@ -23,6 +23,7 @@ export const basicStyles = StyleSheet.create({
     },
     paperTable: {
         height: screenSize.height * 0.6,
+        textAlign: 'center'
     },
     lightText: {
         color: Colors.light,
