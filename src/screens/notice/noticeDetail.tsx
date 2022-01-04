@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, ScrollView,} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Text, Checkbox} from 'react-native-paper';
 import { basicStyles, InputForm, GreenButton, StyledDivider } from '../../components';
 import { Colors } from '../../constants';
 
 export default function NoticeDetailScreen() {
+    // TODO : 댓글 마다 따로 동작하도록
+    const [checked, setChecked] = useState(false)
+
     return(
         <View style={{flex:1}}>
             <View style={basicStyles.container}>
@@ -30,6 +33,14 @@ export default function NoticeDetailScreen() {
                         </View>
                         <View style={styles.commentContent}>
                             <Text style={basicStyles.contentText}>1명 / 51206 / 12시</Text>
+                            <Checkbox
+                                status={checked ? 'checked' : 'unchecked'}
+                                onPress={() => {
+                                    setChecked(!checked);
+                                }}
+                                uncheckedColor={Colors.light}
+                                color={Colors.primary}
+                            />
                         </View>
                     </View>
                     <StyledDivider/>
@@ -40,6 +51,14 @@ export default function NoticeDetailScreen() {
                         </View>
                         <View style={styles.commentContent}>
                             <Text style={basicStyles.contentText}>2명 / 51206 / 12시, 12시 30분</Text>
+                            <Checkbox
+                                status={checked ? 'checked' : 'unchecked'}
+                                onPress={() => {
+                                    setChecked(!checked);
+                                }}
+                                uncheckedColor={Colors.light}
+                                color={Colors.primary}
+                            />
                         </View>
                     </View>
                     <StyledDivider/>
@@ -50,6 +69,14 @@ export default function NoticeDetailScreen() {
                         </View>
                         <View style={styles.commentContent}>
                             <Text style={basicStyles.contentText}>2명 / 51206 / 12시, 12시 30분</Text>
+                            <Checkbox
+                                status={checked ? 'checked' : 'unchecked'}
+                                onPress={() => {
+                                    setChecked(!checked);
+                                }}
+                                uncheckedColor={Colors.light}
+                                color={Colors.primary}
+                            />
                         </View>
                     </View>
                     <StyledDivider/>
@@ -60,6 +87,14 @@ export default function NoticeDetailScreen() {
                         </View>
                         <View style={styles.commentContent}>
                             <Text style={basicStyles.contentText}>2명 / 51206 / 12시, 12시 30분</Text>
+                            <Checkbox
+                                status={checked ? 'checked' : 'unchecked'}
+                                onPress={() => {
+                                    setChecked(!checked);
+                                }}
+                                uncheckedColor={Colors.light}
+                                color={Colors.primary}
+                            />
                         </View>
                     </View>
                 </ScrollView>
@@ -104,7 +139,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     commentContent: {
-
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     commentInput: {
         width: '100%',
