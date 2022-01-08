@@ -8,7 +8,7 @@ export default function PaperTable(props) {
   var data = props.data
   var checkboxKey = props.checkboxKey
   var tableStyle = ('tableStyle' in props) ? props.tableStyle : basicStyles.paperTable
-  var header = ('header' in props) ? props.header : 
+  var header = ('header' in props) ? Object.keys(props.header) :
               (data === undefined) ? null : Object.keys(data[0])
   if (header === null) return null
 
@@ -32,7 +32,7 @@ export default function PaperTable(props) {
   var tableBody = data.map((val) => 
     <DataTable.Row key={val['id']}>
       {
-        Object.keys(data[0]).map((title) =>
+        Object.values(props.header).map((title) =>
           <DataTable.Cell key={title} style={{justifyContent: 'center'}}>
             {
               checkboxKey === title ? 
