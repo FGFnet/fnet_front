@@ -10,6 +10,7 @@ export default function PaperTable(props) {
   var tableStyle = ('tableStyle' in props) ? props.tableStyle : basicStyles.paperTable
   var header = ('header' in props) ? Object.keys(props.header) :
               (data === undefined) ? null : Object.keys(data[0])
+  var index = 1
   if (header === null) return null
 
   var tableHeader = header.map((title) => 
@@ -51,6 +52,7 @@ export default function PaperTable(props) {
                     onPress={() => props.toggleFunc(val['id'])}
                   ></IconButton>
                 ) :
+              title === 'index' ? index++ :
               title in val ? val[title] : null
             }
           </DataTable.Cell>
