@@ -1,48 +1,69 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { Header, InputForm, PaperTable } from '../../components';
 import { Colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
+import api from '../../utils/api';
 
 export default function FGListScreen() {
-    const tableHeader= ['#', '이름', '학번', 'LC1', 'LC2', 'LC3']
-    const fgInfo = [
-        {'id': 1, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 2, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 3, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 4, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 5, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 6, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 7, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 8, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 9, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 10, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37},
-        {'id': 11, 'name': '박민서', 'studentId': 123123, 'LC1': 10, 'LC2': 20, 'LC3': 37}
-    ]
-    const [tableData, updateTableData] = React.useState(fgInfo)
+    const tableHeader= {'#': 'index', '이름': 'name', '학번': 'student_id', 'admin': 'admin'} // id를 인덱스로 변환
+    const [tableData, updateTableData] = React.useState([])
+    const [loading, setLoading] = useState(false)
+    const [searchData, setSearchData] = React.useState([])
+    const [searchQuery, setSearchQuery] = React.useState('')
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                setLoading(true)
+                const res = await api.getFGList()
+                updateTableData(res.data.data)
+            } catch (err) {
+            }
+            setLoading(false)
+        }
+        fetchUsers()
+    }, [])
 
+    const onChangeSearch = (query) => {
+        setSearchQuery(query)
+        const searchResult = []
+        searchData.forEach((value) => {
+            for (var key in value) {
+                if (value[key].toString().search(query) !== -1) {
+                    const data = Object.assign({}, value)
+                    searchResult.push(data)
+                    break
+                }
+            }
+        })
+        updateTableData(searchResult)
+    }
+
+    if (loading) return (<Text>로딩중..</Text>);
     return(
         <ScrollView>
-                <View style={styles.header}>
-                    <Header title='FG List' marginBottom={0}/>
-                    <View style={styles.searchBar}>
-                        <InputForm
-                            style={{width: '80%'}}
-                            height={35}
-                        />
-                        <Icon
-                            style={styles.inputIcon}
-                            name="search-outline"
-                            color={Colors.light}
-                            size={18}
-                        />
-                    </View>
+            <View style={styles.header}>
+                <Header title='FG List' marginBottom={0}/>
+                <View style={styles.searchBar}>
+                    <InputForm
+                        style={{width: '80%'}}
+                        height={35}
+                        value={searchQuery}
+                        onChangeText={onChangeSearch}
+                    />
+                    <Icon
+                        style={styles.inputIcon}
+                        name="search-outline"
+                        color={Colors.light}
+                        size={18}
+                    />
                 </View>
+            </View>
 
-                <PaperTable
-                    header={tableHeader}
-                    data={tableData}
-                />
+            <PaperTable
+                header={tableHeader}
+                data={tableData}
+            />
         </ScrollView>
     )
 }
