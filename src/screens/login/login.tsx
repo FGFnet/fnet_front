@@ -2,9 +2,35 @@ import React from 'react';
 import { View, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
 import { Text, Button, Checkbox } from 'react-native-paper';
 import { Colors } from '../../constants'
+import { useNavigation } from '../../providers';
+import api from '../../utils/api';
 
 export default function LoginScreen() {
+    const navigation = useNavigation();
     const [checked, setChecked] = React.useState(false);
+    const [name, setName] = React.useState('');
+    const [studentId, setStudentId] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
+
+    async function login() {
+        try {
+            setLoading(true)
+            // const res = await api.login({'name': name, 'student_id': studentId})
+            setLoading(false)
+
+            return true // for test
+
+            // if (res.data.error){
+            //     alert("Invalid User")
+            //     return false
+            // }
+            // return true
+        } catch (err) {
+            alert(err)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     return(
         <ScrollView>
@@ -21,10 +47,12 @@ export default function LoginScreen() {
                     <TextInput
                         style={styles.input}
                         placeholder='이름'
+                        onChangeText={(text) => setName(text)}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder='학번'
+                        onChangeText={(text) => setStudentId(text)}
                     />
                 </View>
                 <View style={styles.checkbox_container}>
@@ -40,6 +68,13 @@ export default function LoginScreen() {
                     <Button
                         style={styles.button}
                         labelStyle={styles.button_text}
+                        onPress={async () => {
+                            const loggedIn = await login()
+                            if (loggedIn) {
+                                navigation.navigate('Home')
+                            }
+                        }}
+                        loading={loading}
                     >
                         Login
                     </Button>

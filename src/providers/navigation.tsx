@@ -36,7 +36,7 @@ export function NavigationProvider() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home"
+                initialRouteName="Login"
                 screenOptions={{
                     contentStyle: {backgroundColor: Colors.white}
                 }}
