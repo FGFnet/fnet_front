@@ -6,3 +6,4 @@ export {default as RegisterScreen} from './register';
 export {SettingScreen, SetScheduleScreen, FGListScreen, FreshmenListScreen} from './adminSetting'
 export {default as LoginScreen} from './login';
 export {default as LCSettingScreen} from './lcSetting'
+export {default as LCListScreen} from './lcList';
