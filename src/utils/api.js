@@ -119,10 +119,10 @@ export default {
       }
     })
   },
-  getLCMemberList (id, register) {
+  getLCMemberList (name, register) {
     return ajax('freshman/lc', 'get', {
       params: {
-        id: id,
+        name: name,
         register: register // null, undefined인 경우 제거됨. https://github.com/axios/axios/issues/1139
       }
     })
