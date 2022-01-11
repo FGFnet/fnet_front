@@ -1,13 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, StyleSheet, ScrollView,} from 'react-native';
 import { Text,} from 'react-native-paper';
 import { basicStyles, Header, InputForm, GreenButton,} from '../../components';
+import {useNavigation} from '../../providers'
+import api from '../../utils/api'
 
 export default function NoticeCreateScreen() {
-    function pressevent (){
-        alert('press');
-    }
+    const navigation = useNavigation()
 
+    const [title, setTitle] = useState('')
+    const [content, setContent] = useState('')
+
+    async function createNotice () {
+        const data = {
+            title: title,
+            content: content
+        }
+        try {
+            await api.createNotice(data)
+            alert('등록되었습니다.')
+            navigation.navigate('Notice')
+        } catch (err) {
+            alert(err)
+        }
+    }
 
     return(
         <ScrollView>
@@ -20,6 +36,7 @@ export default function NoticeCreateScreen() {
                         placeholder='title'
                         multiline={false}
                         height= {40}
+                        onChangeText={(text) => setTitle(text)}
                     />
                 </View>
                 <View style={styles.content}>
@@ -29,15 +46,16 @@ export default function NoticeCreateScreen() {
                         placeholder='contents'
                         multiline={true}
                         height= {200}
+                        onChangeText={(text) => setContent(text)}
                     />
                 </View>
                 <GreenButton
                     text='등록'
-                    press={pressevent}
+                    press={createNotice}
                     viewStyle={{
-                        paddingTop: 30, 
-                        width:'100%', 
-                        flex: 1, 
+                        paddingTop: 30,
+                        width:'100%',
+                        flex: 1,
                         alignItems: 'flex-end'
                     }}
                 />
