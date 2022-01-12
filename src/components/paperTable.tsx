@@ -1,12 +1,13 @@
 import React from 'react';
-import {ScrollView, Platform, StyleSheet} from 'react-native';
-import {DataTable, IconButton} from 'react-native-paper';
+import {ScrollView, Platform, StyleSheet, View} from 'react-native';
+import {DataTable, IconButton, ActivityIndicator} from 'react-native-paper';
 import {basicStyles} from './basic_styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { Colors } from '../constants';
 export default function PaperTable(props) {
   var data = props.data
   var checkboxKey = props.checkboxKey
+  var loading = props.loading
   var tableStyle = ('tableStyle' in props) ? props.tableStyle : basicStyles.paperTable
   var header = ('header' in props) ? Object.keys(props.header) :
               (data === undefined) ? null : Object.keys(data[0])
@@ -18,15 +19,22 @@ export default function PaperTable(props) {
       {title}
     </DataTable.Title>
   )
-
-  //TODO: No data 출력하도록 변경
-  if (data.length === 0) {
+  
+  if (loading === true) {
     return (
-      <DataTable style={tableStyle}>
-        <DataTable.Header>
-          {tableHeader}
-        </DataTable.Header>
-      </DataTable>
+      <View>
+        <DataTable style={tableStyle}>
+          <DataTable.Header>
+            {tableHeader}
+          </DataTable.Header>
+          <ActivityIndicator 
+            animating={true} 
+            size={'large'} 
+            color={Colors.primary_lighter} 
+            style={{marginTop: basicStyles.paperTable.height/3}}
+          />
+        </DataTable>
+      </View>
     )
   }
 
