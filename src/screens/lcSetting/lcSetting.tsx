@@ -109,15 +109,15 @@ export default function LCSettingScreen() {
                     <Text style={{paddingRight: 20}}>첫쨋날</Text>
                     
                     <InputForm
-                        placeholder='LC명'
+                        placeholder={firstLC['name']}
                         height={40}
                         style={{width: '40%', paddingRight: 20}}
-                        value={firstLC}
-                        onChangeText={text=>setFirstLC(text)}
+                        value={newFirstLC['name']}
+                        onChangeText={text=>onChangeFirstLC(text)}
                     />
                     <TouchableOpacity onPress={()=>showDatePicker('1')}>
                         <InputForm
-                            placeholder='날짜'
+                            placeholder={firstLC['schedule']}
                             editable={false}
                             value={newFirstLC['schedule']}
                             height={40}
@@ -131,15 +131,15 @@ export default function LCSettingScreen() {
                     <Text style={{paddingRight: 20}}>둘쨋날</Text>
                     
                     <InputForm
-                        placeholder='LC명'
+                        placeholder={secondLC['name']}
                         height={40}
                         style={{width: '40%', paddingRight: 20}}
-                        value={secondLC}
+                        value={newSecondLC['name']}
                         onChangeText={text=>setSecondLC(text)}
                     />
                     <TouchableOpacity onPress={()=>showDatePicker('2')}>
                         <InputForm
-                            placeholder='날짜'
+                            placeholder={secondLC['schedule']}
                             editable={false}
                             value={newSecondLC['schedule']}
                             height={40}
@@ -153,15 +153,15 @@ export default function LCSettingScreen() {
                     <Text style={{paddingRight: 20}}>셋쨋날</Text>
                     
                     <InputForm
-                        placeholder='LC명'
+                        placeholder={thirdLC['name']}
                         height={40}
                         style={{width: '40%', paddingRight: 20}}
-                        value={thirdLC}
+                        value={newThirdLC['name']}
                         onChangeText={text=>setThirdLC(text)}
                     />
                     <TouchableOpacity onPress={()=>showDatePicker('3')}>
                         <InputForm
-                            placeholder='날짜'
+                            placeholder={thirdLC['schedule']}
                             editable={false}
                             value={newThirdLC['schedule']}
                             height={40}
