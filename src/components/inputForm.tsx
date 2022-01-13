@@ -22,6 +22,7 @@ function InputForm(props) {
                 outlineColor= {Colors.primary_lighter}
                 editable={props.editable}
                 pointerEvents={props.pointerEvents}
+                onSubmitEditing={props.onSubmitEditing}
             />
         </View>
     );

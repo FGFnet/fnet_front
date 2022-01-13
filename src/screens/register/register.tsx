@@ -9,20 +9,21 @@ import api from '../../utils/api';
 export default function RegisterScreen() {
     const checkboxKey = 'register'
     const [tableData, updateTableData] = React.useState([])
-    const [searchData, setSearchData] = React.useState([])
     const [searchQuery, setSearchQuery] = React.useState('')
     const [loading, setLoading] = useState(false);
+
+    async function fetchUsers () {
+        try {
+            setLoading(true)
+            const res = await api.getFreshmanList()
+            updateTableData(res.data.data)
+        } catch (err) {
+            alert(err)
+        }
+        setLoading(false)
+    }
+
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                setLoading(true)
-                const res = await api.getFreshmanList()
-                updateTableData(res.data.data)
-                setSearchData(res.data.data)
-            } catch (err) {
-            }
-            setLoading(false)
-        };
         fetchUsers();
     }, []);
 
@@ -34,42 +35,30 @@ export default function RegisterScreen() {
 
     const onChangeSearch = (query) => {
         setSearchQuery(query)
-        const searchResult = []
-        searchData.forEach((value) => {
-            for (var key in value) {
-                if (value[key].toString().search(query) !== -1) {
-                    const data = Object.assign({}, value)
-                    searchResult.push(data)
-                    break
-                }
-            }
-        })
-        updateTableData(searchResult)
     }
 
+    async function onSubmit () { // search by freshman name or LC name
+        try {
+            setLoading(true)
+            const res = await api.searchFreshman(searchQuery)
+            updateTableData(res.data.data)
+        } catch (err) {
+            alert(err)
+        }
+        setLoading(false)
+    }
     
-    function Register (id) {
-        //TODO: Register 상태 업데이트 API 호출(param: id)
-        const newData = []
-        tableData.forEach((value) => {
-            const data = Object.assign({}, value)
-            if (value['id'] === id) {
-                data[checkboxKey] = !data[checkboxKey]
+    async function Register (id) {
+        try {
+            await api.registerFreshman({'id': id})
+            if (!!searchQuery) {
+                await onSubmit()
+            } else {
+                await fetchUsers()
             }
-            newData.push(data)
-        })
-
-        //TODO: 최선...?
-        const newSearchData = []
-        searchData.forEach((value) => {
-            const data = Object.assign({}, value)
-            if (value['id'] === id) {
-                data[checkboxKey] = !data[checkboxKey]
-            }
-            newSearchData.push(data)
-        })
-        updateTableData(newData)
-        setSearchData(newSearchData)
+        } catch (err) {
+            alert(err)
+        }
     }
 
     return(
@@ -83,6 +72,8 @@ export default function RegisterScreen() {
                             height={35}
                             value={searchQuery}
                             onChangeText={onChangeSearch}
+                            multiline={false}
+                            onSubmitEditing={onSubmit}
                         />
                         <Icon
                             style={styles.inputIcon}
