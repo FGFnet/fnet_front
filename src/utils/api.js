@@ -47,7 +47,7 @@ export default {
     return ajax('notice', 'get')
   },
   createNotice (data) {
-    return ajax('admin/notice/', 'post', {
+    return ajax('admin/notice', 'post', {
       data
     })
   },
