@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text } from 'react-native-paper';
-import { InputForm, Header, PaperTable } from '../../components';
+import { InputForm, Header, PaperTable, basicStyles } from '../../components';
 import { Colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import api from '../../utils/api';
 
 export default function LCListScreen({route}) {
-  const tableHeader= {'#': 'index', '이름': 'name', '전화번호': 'phone_number', '계열': 'department'}
+  const tableHeader= {'#': 'index', '이름': 'name', '계열': 'department'}
   const [tableData, updateTableData] = React.useState([])
   const [loading, setLoading] = useState(false)
   const [searchData, setSearchData] = React.useState([])
@@ -44,32 +44,36 @@ export default function LCListScreen({route}) {
       updateTableData(searchResult)
   }
 
-  if (loading) return (<Text>로딩중..</Text>);
+//   if (loading) return (<Text>로딩중..</Text>);
   return(
       <ScrollView nestedScrollEnabled = {true}>
-          <View style={styles.header}>
-              <Header title={lcName.toUpperCase() + ' Members'} marginBottom={0}/>
-              <View style={styles.searchBar}>
-                  <InputForm
-                      style={{width: '80%'}}
-                      height={35}
-                      value={searchQuery}
-                      onChangeText={onChangeSearch}
-                  />
-                  <Icon
-                      style={styles.inputIcon}
-                      name="search-outline"
-                      color={Colors.light}
-                      size={18}
-                  />
-              </View>
-          </View>
+          <View style={basicStyles.container}>
+            <View style={styles.header}>
+                <Header title={lcName.toUpperCase() + ' Members'} marginBottom={0}/>
+                <View style={styles.searchBar}>
+                    <InputForm
+                        style={{width: '80%'}}
+                        height={35}
+                        value={searchQuery}
+                        onChangeText={onChangeSearch}
+                    />
+                    <Icon
+                        style={styles.inputIcon}
+                        name="search-outline"
+                        color={Colors.light}
+                        size={18}
+                    />
+                </View>
+            </View>
 
-          <PaperTable
-              header={tableHeader}
-              data={tableData}
-          />
-      </ScrollView>
+            <View style={{width: '100%'}}>
+                <PaperTable
+                    header={tableHeader}
+                    data={tableData}
+                />
+            </View>
+        </View>
+    </ScrollView>
     )
 }
 
@@ -78,9 +82,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 30,
-        paddingTop: '10%',
-        paddingRight: '10%',
-        paddingLeft: '10%'
     },
     searchBar: {
         flex: 1,
