@@ -146,6 +146,13 @@ export default {
     return ajax('admin/freshman/register', 'put', {
       data
     })
+  },
+  searchFreshman (query) {
+    return ajax('admin/freshman/search', 'get', {
+      params: {
+        query
+      }
+    })
   }
 }
 
