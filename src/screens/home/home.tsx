@@ -11,7 +11,7 @@ export default function HomeScreen() {
 
     const [fgData, setFGData] = useState([]) // FG info
     const [lcData, setLCData] = useState([]) // LC list of FG
-    const [firstLCData, setFirstLCData] = useState({})
+    const [firstLCData, setFirstLCData] = useState({"name": "", "schedule": "/"})
 
     const [totalRegister, setTotalRegister] = useState(0)
     const [loading, setLoading] = useState(false)
@@ -22,12 +22,9 @@ export default function HomeScreen() {
                 setLoading(true)
                 const res_fg = await api.getFG()
                 setFGData(res_fg.data.data)
-                const res_lc = await api.getLCList()
+                const res_lc = await api.getLC()
                 setLCData(res_lc.data.data)
-                if (res_lc.data.length == 0){ // empty LC list
-                    setFirstLCData([{'name': 'None', 'schedule': '/'}])
-                    setTotalRegister(0)
-                } else{
+                if (res_lc.data.length > 0){
                     const firstDate = lcData[0]['schedule'].split('-')
                     setFirstLCData({"name": lcData[0]['name'], "schedule": +firstDate[1] + '/' + +firstDate[2]})
                     const res_register = await api.getLCMemberList(firstLCData['id'], true)
@@ -43,11 +40,8 @@ export default function HomeScreen() {
 
 
     const is_admin = () => {
-        if (fgData['is_admin']){
-            return 1
-        } else {
-            return 0
-        }
+        if (fgData['is_admin']) return 1
+        else return 0
     }
 
     var otSchedule = lcData.map((lc) =>
