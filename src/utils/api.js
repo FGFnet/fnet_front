@@ -92,23 +92,15 @@ export default {
       data
     })
   },
-  getLC (id) {
-    return ajax('lc', 'get', {
+  getLC (name) {
+    return ajax('lc/', 'get', {
       params: {
-        id
+        name: name
       }
     })
   },
-  getLCList () {
-    return ajax('lc', 'get')
-  },
-  createLC (data) {
-    return ajax('lc', 'post', {
-      data
-    })
-  },
-  editLC (data) {
-    return ajax('lc', 'put', {
+  updateLC (data) {
+    return ajax('lc/', 'post', {
       data
     })
   },
