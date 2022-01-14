@@ -37,51 +37,51 @@ export default {
     })
   },
   getNotice (id) {
-    return ajax('notice', 'get', {
+    return ajax('notice/', 'get', {
       params: {
         id
       }
     })
   },
   getNoticeList () {
-    return ajax('notice', 'get')
+    return ajax('notice/', 'get')
   },
   createNotice (data) {
-    return ajax('admin/notice', 'post', {
+    return ajax('admin/notice/', 'post', {
       data
     })
   },
   editNotice (data) {
-    return ajax('admin/notice', 'put', {
+    return ajax('admin/notice/', 'put', {
       data
     })
   },
   deleteNotice (id) {
-    return ajax('admin/notice', 'delete', {
+    return ajax('admin/notice/', 'delete', {
       params: {
         id
       }
     })
   },
   getCommentList (noticeId) {
-    return ajax('notice/comment', 'get', {
+    return ajax('notice/comment/', 'get', {
       params: {
         notice_id: noticeId
       }
     })
   },
   createComment (data) {
-    return ajax('notice/comment', 'post', {
+    return ajax('notice/comment/', 'post', {
       data
     })
   },
   editComment (data) {
-    return ajax('notice/comment', 'put', {
+    return ajax('notice/comment/', 'put', {
       data
     })
   },
   deleteComment (id) {
-    return ajax('notice/comment', 'delete', {
+    return ajax('notice/comment/', 'delete', {
       params: {
         id
       }

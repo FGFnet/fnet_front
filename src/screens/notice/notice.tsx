@@ -8,7 +8,7 @@ import api from '../../utils/api'
 
 export default function NoticeScreen() {
     const navigation = useNavigation();
-    function navigate(){navigation.navigate('NoticeCreate')}
+    function navigate(){navigation.navigate('NoticeCreate', {mode: 'create'})}
 
     const [noticeList, setNoticeList] = useState([])
     const [refresing, setRefresing] = useState(false)

@@ -1,12 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, ScrollView,} from 'react-native';
-import {Text, Checkbox} from 'react-native-paper';
+import React, {useState} from 'react';
+import {View, StyleSheet, ScrollView, RefreshControl} from 'react-native';
+import {Text, Checkbox, IconButton} from 'react-native-paper';
+import { Menu, MenuItem } from 'react-native-material-menu';
 import { basicStyles, InputForm, GreenButton, StyledDivider } from '../../components';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../../constants';
-import api from '../../utils/api'
 
-//1년 이상 차이 : 년도만 표시, 1개월 이상 차이: *개월로 표시, 1일 이상 차이: *일 *시간, 이외: *시간 *분
+import api from '../../utils/api'
+import {useNavigation} from '../../providers'
+import { useFocusEffect } from '@react-navigation/native';
+
 export default function NoticeDetailScreen({route}) {
+    const navigation = useNavigation();
+
     const {id} = route.params
     const noticeId = id ? id : null
     const [noticeTitle, setNoticeTitle] = useState('')
@@ -14,13 +20,37 @@ export default function NoticeDetailScreen({route}) {
     const [noticeTimeDiff, setNoticeTimeDiff] = useState('')
     const [commentContent, setcommentContent] = useState('')
     const [noticeComment, setNoticeComment] = useState([])
-    
-    const [loading, setLoading] = useState(false)
 
+    const [menuVisible, setMenuVisible] = useState(false)
+    const [refreshing, setRefreshing] = useState(false)
+    const [loading, setLoading] = useState(false)
+    
+
+    const onRefresh = React.useCallback(async () => {
+        setRefreshing(true)
+        await setTimeout(()=>setRefreshing(false),1000)
+    }, [])
+
+    const openMenu = () => {
+        setMenuVisible(true)
+    }
+    const closeMenu = () => {
+        setMenuVisible(false)
+    }
+
+    const editNotice = ()=> {
+        navigation.navigate('NoticeCreate', {mode: 'edit', noticeId: noticeId})
+    }
+    const deleteNotice = async () => {
+        await api.deleteNotice(noticeId)
+        navigation.navigate('Notice')
+    }
+
+    //1년 이상 차이 : 년도만 표시, 1개월 이상 차이: *개월로 표시, 1일 이상 차이: *일 *시간, 이외: *시간 *분
     const calculateTimeDiff = (time) => {
         let diff = ''
-        const nowDate = new Date()
         const createTimeDate = new Date(time)
+        const nowDate = new Date()
         const nowYear = nowDate.getFullYear()
         const createTimeYear = createTimeDate.getFullYear()
 
@@ -109,11 +139,12 @@ export default function NoticeDetailScreen({route}) {
             alert(err)
         }
     }
-
-    useEffect(()=> {
-        getNotice()
-        getNoticeComment()
-    },[])
+    useFocusEffect(
+        React.useCallback(()=>{
+            getNotice()
+            getNoticeComment()
+        }, [noticeId])
+    )
 
     let commentView = noticeComment.map((comment) => {
             return (
@@ -138,9 +169,19 @@ export default function NoticeDetailScreen({route}) {
         }
     )
     
-    if(loading) return(<View><Text>Loading...</Text></View>)
     return(
         <View style={{flex:1}}>
+            <View style={{flexDirection:'row', justifyContent:'flex-end', alignContent: 'center', position: 'absolute', top: 10, right: 10}}>
+                <Menu
+                    visible={menuVisible}
+                    anchor={<IconButton icon="ellipsis-horizontal" onPress={openMenu} size={15}/>}
+                    onRequestClose={closeMenu}
+                >
+                    <MenuItem onPress={editNotice}><Icon name="create-outline"/> Edit</MenuItem>
+                    <MenuItem onPress={deleteNotice}><Icon name="trash-outline"/> Delete</MenuItem>
+                    <MenuItem onPress={closeMenu}><Icon name="close-outline"/> Close</MenuItem>
+                </Menu>
+            </View>
             <View style={basicStyles.container}>
                 <View style={basicStyles.insideContainer}>
                     <View style={styles.noticeTitle}>
@@ -152,14 +193,23 @@ export default function NoticeDetailScreen({route}) {
                     </View>
                 </View>
                 <StyledDivider/>
-                <ScrollView style={styles.comment} nestedScrollEnabled = {true}>
+                <ScrollView
+                    style={styles.comment} 
+                    nestedScrollEnabled = {true}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    }
+                >
                     {commentView}
                 </ScrollView>
                 <View style={styles.commentInput}>
                     <InputForm
                         style={styles.commentInputForm}
-                        multiline={true}
-                        // height={40}
+                        multiline={false}
+                        height={40}
                         editable={true}
                         value={commentContent}
                         onChangeText={(text)=>setcommentContent(text)}

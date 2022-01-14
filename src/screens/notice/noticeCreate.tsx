@@ -1,25 +1,49 @@
-import React, {useState} from 'react';
-import { View, StyleSheet, ScrollView,} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, StyleSheet, ScrollView} from 'react-native';
 import { Text,} from 'react-native-paper';
 import { basicStyles, Header, InputForm, GreenButton,} from '../../components';
 import {useNavigation} from '../../providers'
 import api from '../../utils/api'
 
-export default function NoticeCreateScreen() {
+export default function NoticeCreateScreen({route}) {
     const navigation = useNavigation()
+    const mode = route.params.mode
+    const noticeId = route.params.noticeId ? route.params.noticeId : null
 
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
 
-    async function createNotice () {
-        const data = {
-            title: title,
-            content: content
+    useEffect (()=> {
+        init()
+    }, [])
+    
+    async function init() {
+        if (mode === 'edit') {
+            const res = await api.getNotice(noticeId)
+            setTitle(res.data.data.title)
+            setContent(res.data.data.content)
         }
+    }
+
+    async function submitNotice () {
         try {
-            await api.createNotice(data)
-            alert('등록되었습니다.')
-            navigation.navigate('Notice')
+            if (mode==='create') {
+                const data = {
+                    title: title,
+                    content: content
+                }
+                await api.createNotice(data)
+                alert('등록되었습니다.')
+                navigation.navigate('Notice')
+            } else {
+                const data = {
+                    id: noticeId,
+                    title: title,
+                    content: content
+                }
+                await api.editNotice(data)
+                navigation.navigate('NoticeDetail', {id: noticeId})
+            }
         } catch (err) {
             alert(err)
         }
@@ -37,6 +61,7 @@ export default function NoticeCreateScreen() {
                         multiline={false}
                         height= {40}
                         onChangeText={(text) => setTitle(text)}
+                        value={title}
                     />
                 </View>
                 <View style={styles.content}>
@@ -47,11 +72,12 @@ export default function NoticeCreateScreen() {
                         multiline={true}
                         height= {200}
                         onChangeText={(text) => setContent(text)}
+                        value = {content}
                     />
                 </View>
                 <GreenButton
                     text='등록'
-                    press={createNotice}
+                    press={submitNotice}
                     viewStyle={{
                         paddingTop: 30,
                         width:'100%',
