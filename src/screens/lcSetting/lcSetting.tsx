@@ -9,15 +9,9 @@ export default function LCSettingScreen() {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [selectDay, setSelectDay] = useState("")
 
-    // Original LC information
-    const [firstLC, setFirstLC] = useState({"name":"", "schedule":""});
-    const [secondLC, setSecondLC] = useState({"name":"", "schedule":""});
-    const [thirdLC, setThirdLC] = useState({"name":"", "schedule":""});
-
-    // Change LC information
-    const [newFirstLC, onChangeFirstLC] = useState({"name":"", "schedule":""})
-    const [newSecondLC, onChangeSecondLC] = useState({"name":"", "schedule":""})
-    const [newThirdLC, onChangeThirdLC] = useState({"name":"", "schedule":""})
+    const [firstLC, setFirstLC] = useState({"old_id":0, "name": "", "schedule":""});
+    const [secondLC, setSecondLC] = useState({"old_id":0, "name": "", "schedule":""});
+    const [thirdLC, setThirdLC] = useState({"old_id":0, "name": "", "schedule":""});
 
     const [lcList, setLCList] = useState([])
     const [loading, setLoading] = useState(false);
@@ -27,22 +21,11 @@ export default function LCSettingScreen() {
         const fetchUsers = async () => {
             try {
                 setLoading(true)
-                const res = await api.getLCList()
+                const res = await api.getLC()
                 setLCList(res.data.data)
-                for (let i=0; i<lcList.length; i++){
-                    if (i == 0) {
-                        setFirstLC({"name":lcList[0]['name'], "schedule": lcList[0]['schedule']})
-                        onChangeFirstLC({"name":lcList[0]['name'], "schedule": lcList[0]['schedule']})
-                    }
-                    else if (i == 1) {
-                        setSecondLC({"name":lcList[0]['name'], "schedule": lcList[0]['schedule']})
-                        onChangeSecondLC({"name":lcList[0]['name'], "schedule": lcList[0]['schedule']})
-                    }
-                    else {
-                        setThirdLC({"name":lcList[0]['name'], "schedule": lcList[0]['schedule']})
-                        onChangeThirdLC({"name":lcList[0]['name'], "schedule": lcList[0]['schedule']})
-                    }
-                }
+                if(lcList[0]) setFirstLC({"old_id": lcList[0]['id'], "name": lcList[0]['name'], "schedule": lcList[0]['schedule']})
+                if(lcList[1]) setSecondLC({"old_id": lcList[1]['id'], "name": lcList[1]['name'], "schedule": lcList[1]['schedule']})
+                if(lcList[2]) setThirdLC({"old_id": lcList[2]['id'], "name": lcList[2]['name'], "schedule": lcList[2]['schedule']})
             } catch (err) {
             }
             setLoading(false)
@@ -50,37 +33,13 @@ export default function LCSettingScreen() {
         fetchUsers();
     })
 
-    async function updateLCSetting() {
-        try{
-            if(firstLC['name']!=="" && firstLC['name']!==newFirstLC['name']){
-                alert('You can not change LC')
-                return;
-            }
-            if(secondLC['name']!=="" && secondLC['name']!==newSecondLC['name']){
-                alert('You can not change LC')
-                return;
-            }
-            if(thirdLC['name']!=="" && thirdLC['name']!==newThirdLC['name']){
-                alert('You can not change LC')
-                return;
-            }
-
-            const res_first = await api.getLC({"name":newFirstLC['name']})
-            if(res_first.data.data.length > 1) await api.createLC(newFirstLC)
-            else await api.editLC(newFirstLC)
-            
-            const res_second = await api.getLC({"name":newSecondLC['name']})
-            if(res_second.data.data.length > 1) await api.createLC(newSecondLC)
-            else await api.editLC(newSecondLC)
-
-            const res_third = await api.getLC({"name":newThirdLC['name']})
-            if(res_third.data.data.length > 1) await api.createLC(newThirdLC)
-            else await api.editLC(newThirdLC)
-
-        } catch (err) {
-
+    async function updateLCSetting(lc) {
+        try {
+            if (lc === '1') await api.editLC(firstLC)
+            else if (lc == '2') await api.editLC(secondLC)
+            else await api.editLC(thirdLC)
+        } catch(err) {
         }
-        location.reload()
     }
 
     const showDatePicker = (selectDay) => {
@@ -94,9 +53,9 @@ export default function LCSettingScreen() {
 
     const handleConfirm = (date) => {
         hideDatePicker()
-        if (selectDay === '1') onChangeFirstLC({"name":newFirstLC['name'], "schedule":date.format("yyyy/MM/dd")})
-        else if (selectDay === '2') onChangeSecondLC({"name":newSecondLC['name'], "schedule":date.format("yyyy/MM/dd")})
-        else onChangeThirdLC({"name":newThirdLC['name'], "schedule":date.format("yyyy/MM/dd")})
+        if (selectDay === '1') setFirstLC({"old_id": firstLC['old_id'], "name":firstLC['name'], "schedule":date.format("yyyy/MM/dd")})
+        else if (selectDay === '2') setSecondLC({"old_id": secondLC['old_id'], "name": secondLC['name'], "schedule":date.format("yyyy/MM/dd")})
+        else setThirdLC({"old_id":thirdLC['old_id'], "name":thirdLC['name'], "schedule":date.format("yyyy/MM/dd")})
     }
 
     if (loading) return (<Text>Loading...</Text>)
@@ -112,19 +71,28 @@ export default function LCSettingScreen() {
                         placeholder={firstLC['name']}
                         height={40}
                         style={{width: '40%', paddingRight: 20}}
-                        value={newFirstLC['name']}
-                        onChangeText={text=>onChangeFirstLC(text)}
+                        value={firstLC['name']}
+                        onChangeText={text=>setFirstLC(text)}
                     />
                     <TouchableOpacity onPress={()=>showDatePicker('1')}>
                         <InputForm
                             placeholder={firstLC['schedule']}
                             editable={false}
-                            value={newFirstLC['schedule']}
+                            value={firstLC['schedule']}
                             height={40}
                             pointerEvents="none"
                             style={{width: 120}}
                         />
                     </TouchableOpacity>
+                    <GreenButton
+                    text='저장' 
+                    viewStyle={{
+                        width:'100%', 
+                        flex: 1, 
+                        alignItems: 'flex-end'
+                    }}
+                    onClick={updateLCSetting('1')}
+                    />
                 </View>
 
                 <View style={basicStyles.insideRowContainer}>
@@ -134,19 +102,29 @@ export default function LCSettingScreen() {
                         placeholder={secondLC['name']}
                         height={40}
                         style={{width: '40%', paddingRight: 20}}
-                        value={newSecondLC['name']}
+                        value={secondLC['name']}
                         onChangeText={text=>setSecondLC(text)}
                     />
                     <TouchableOpacity onPress={()=>showDatePicker('2')}>
                         <InputForm
                             placeholder={secondLC['schedule']}
                             editable={false}
-                            value={newSecondLC['schedule']}
+                            value={secondLC['schedule']}
                             height={40}
                             pointerEvents="none"
                             style={{width: 120}}
                         />
                     </TouchableOpacity>
+
+                    <GreenButton
+                    text='저장' 
+                    viewStyle={{
+                        width:'100%', 
+                        flex: 1, 
+                        alignItems: 'flex-end'
+                    }}
+                    onClick={updateLCSetting('2')}
+                    />
                 </View>
 
                 <View style={basicStyles.insideRowContainer}>
@@ -156,14 +134,14 @@ export default function LCSettingScreen() {
                         placeholder={thirdLC['name']}
                         height={40}
                         style={{width: '40%', paddingRight: 20}}
-                        value={newThirdLC['name']}
+                        value={thirdLC['name']}
                         onChangeText={text=>setThirdLC(text)}
                     />
                     <TouchableOpacity onPress={()=>showDatePicker('3')}>
                         <InputForm
                             placeholder={thirdLC['schedule']}
                             editable={false}
-                            value={newThirdLC['schedule']}
+                            value={thirdLC['schedule']}
                             height={40}
                             pointerEvents="none"
                             style={{width: 120}}
@@ -175,16 +153,16 @@ export default function LCSettingScreen() {
                         onConfirm={handleConfirm}
                         onCancel={hideDatePicker}
                     />
-                </View>
-                <GreenButton
+                    <GreenButton
                     text='저장' 
                     viewStyle={{
                         width:'100%', 
                         flex: 1, 
                         alignItems: 'flex-end'
                     }}
-                    onClick={updateLCSetting}
-                />
+                    onClick={updateLCSetting('3')}
+                    />
+                </View>
             </View>
         </ScrollView>
         
