@@ -1,13 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {View, Image, StyleSheet, ScrollView} from 'react-native';
-import {Text, Button, Divider} from 'react-native-paper';
-import {Colors} from '../../constants';
+import React, { useState, useEffect } from 'react';
+import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import { Text, Button, Divider } from 'react-native-paper';
+import { Colors } from '../../constants';
 import { basicStyles, GreenButton, Header } from '../../components';
-import {useNavigation} from '../../providers';
+import { useNavigation } from '../../providers';
+import { useSelector } from 'react-redux';
+import type { AppState, User } from '../../store';
 import api from '../../utils/api'
 
 export default function HomeScreen() {
     const navigation = useNavigation();
+    const loggedUser = useSelector<AppState, User>((state) => state.loggedUser)
 
     const [fgData, setFGData] = useState([]) // FG info
     const [lcData, setLCData] = useState([]) // LC list of FG
@@ -59,13 +62,13 @@ export default function HomeScreen() {
     if (loading) return (<Text>Loading...</Text>)
     return(
         <ScrollView>
-            <Button
-                style={{position: 'absolute', bottom:0, right:0, zIndex: is_admin()}}
+            { loggedUser.is_admin && <Button
+                style={{position: 'absolute', bottom:0, right:0, zIndex: 1}}
                 icon="settings-outline"
                 onPress={() => {
                     navigation.navigate('Setting', {})
                 }}
-            >admin</Button>
+            >admin</Button> }
             
             <View style={styles.header}>
                 <Image
@@ -118,7 +121,7 @@ export default function HomeScreen() {
                     contentStyle={styles.button}
                     labelStyle={{fontSize: 30}}
                     onPress={() => {
-                        navigation.navigate('Register', {});
+                        loggedUser.is_admin ? navigation.navigate('Register', {}) : alert("Permission Denied")
                     }}
                 >
                     <Text style={{fontSize: 14, color: Colors.primary}}>Register</Text>
