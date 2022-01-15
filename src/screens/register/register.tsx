@@ -37,7 +37,7 @@ export default function RegisterScreen() {
         setSearchQuery(query)
     }
 
-    async function onSubmit () { // search by freshman name or LC name
+    async function onSubmit () { // search by freshman name
         try {
             setLoading(true)
             const res = await api.searchFreshman(searchQuery)
@@ -74,6 +74,7 @@ export default function RegisterScreen() {
                             onChangeText={onChangeSearch}
                             multiline={false}
                             onSubmitEditing={onSubmit}
+                            placeholder='이름'
                         />
                         <Icon
                             style={styles.inputIcon}
