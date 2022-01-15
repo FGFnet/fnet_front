@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView, RefreshControl} from 'react-native';
-import {Text, Checkbox, IconButton} from 'react-native-paper';
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import { Text, Checkbox, IconButton } from 'react-native-paper';
 import { Menu, MenuItem } from 'react-native-material-menu';
 import { basicStyles, InputForm, GreenButton, StyledDivider } from '../../components';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../../constants';
 
 import api from '../../utils/api'
-import {useNavigation} from '../../providers'
+import { useNavigation } from '../../providers'
 import { useFocusEffect } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import type { AppState, User } from '../../store';
 
 export default function NoticeDetailScreen({route}) {
     const navigation = useNavigation();
+    const loggedUser = useSelector<AppState, User>((state) => state.loggedUser)
 
     const {id} = route.params
     const noticeId = id ? id : null
@@ -162,6 +165,7 @@ export default function NoticeDetailScreen({route}) {
                             }}
                             uncheckedColor={Colors.light}
                             color={Colors.primary}
+                            disabled={!!!loggedUser.is_admin}
                         />
                     </View>
                 </View>

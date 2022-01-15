@@ -4,10 +4,13 @@ import {Text} from 'react-native-paper';
 import { basicStyles, GreenButton, Header } from '../../components';
 import {useNavigation} from '../../providers'
 import { useFocusEffect } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import type { AppState, User } from '../../store';
 import api from '../../utils/api'
 
 export default function NoticeScreen() {
     const navigation = useNavigation();
+    const loggedUser = useSelector<AppState, User>((state) => state.loggedUser)
     function navigate(){navigation.navigate('NoticeCreate', {mode: 'create'})}
 
     const [noticeList, setNoticeList] = useState([])
@@ -64,12 +67,11 @@ export default function NoticeScreen() {
         />
     )
 
-    //TODO: render new button only for admin
     return(
         <View style={basicStyles.container}>
             <View style={styles.header}>
                 <Header title='공지사항'/>
-                <GreenButton text='+new' press={navigate}/>
+                { loggedUser.is_admin && <GreenButton text='+new' press={navigate}/> }
             </View>
             <FlatList
                 ListEmptyComponent={
