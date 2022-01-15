@@ -15,16 +15,11 @@ export default function LoginScreen() {
     async function login() {
         try {
             setLoading(true)
-            // const res = await api.login({'name': name, 'student_id': studentId})
+            const res = await api.login({'name': name, 'password': studentId})
+            const res2 = await api.getUserInfo()
+            console.log(res2.data)
             setLoading(false)
-
-            return true // for test
-
-            // if (res.data.error){
-            //     alert("Invalid User")
-            //     return false
-            // }
-            // return true
+            return true
         } catch (err) {
             alert(err)
         } finally {
