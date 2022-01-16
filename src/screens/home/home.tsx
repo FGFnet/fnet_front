@@ -7,51 +7,60 @@ import { useNavigation } from '../../providers';
 import { useSelector } from 'react-redux';
 import type { AppState, User } from '../../store';
 import api from '../../utils/api'
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function HomeScreen() {
     const navigation = useNavigation();
     const loggedUser = useSelector<AppState, User>((state) => state.loggedUser)
 
-    const [fgData, setFGData] = useState([]) // FG info
-    const [lcData, setLCData] = useState([]) // LC list of FG
-    // const [firstLCData, setFirstLCData] = useState({"name": "", "schedule": "/"})
-
+    const [lcList, setLCList] = useState([])
+    const [lc, setLC] = useState('-')
+    const [today, setToday] = useState('')
     const [totalRegister, setTotalRegister] = useState(0)
+
     const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
-        const fetchUsers = async() => {
-            try {
-                setLoading(true)
-                const res_lc = await api.getLC()
-                setLCData(res_lc.data.data)
-                if (res_lc.data.length > 0){
-                    const firstDate = lcData[0]['schedule'].split('-')
-                    setFirstLCData({"name": lcData[0]['name'], "schedule": +firstDate[1] + '/' + +firstDate[2]})
-                    const res_register = await api.getLCMemberList(firstLCData['id'], true)
-                    setTotalRegister(res_register.data.length)
-                }
-            } catch(err) {
+    useFocusEffect(
+        React.useCallback(() => {
+            init()
+        },[])
+    )
 
+    async function init() {
+        try {
+            setLoading(true)
+            const res = await api.getLC()
+            const todayDate = new Date()
+            setToday((todayDate.getMonth()+1)+'/'+todayDate.getDate())
+            if (res.data.data.length > 0){
+                setLCList(res.data.data)
+                lcList.map(async (lc)=>{
+                    const schedule = new Date(lc.schdule)
+                    if (todayDate.getTime() == schedule.getTime()) {
+                        setLC(lc.name)
+                        const res = await api.getLCMemberList(lc.name, true)
+                        setTotalRegister(res.data.data.length)
+                    }
+                })
             }
-            setLoading(false)
-        };
-        fetchUsers();
-    })
 
+        } catch(err) {
+        }
+        setLoading(false)
+    };
 
-    const is_admin = () => {
-        if (fgData['is_admin']) return 1
-        else return 0
+    function dateFormatter(date) {
+        const schedule = new Date(date)
+        return schedule.getFullYear() + '.' + (schedule.getMonth()+1) + '.' + schedule.getDate()
     }
 
-    var otSchedule = lcData.map((lc) =>
-        <View key = {lc['id']} style={styles.schedule}>
+    var otSchedule = lcList.map((lc) =>
+        <View key = {lc.id} style={styles.schedule}>
             <Text style={{paddingRight: 20}}>
-                {lc['schedule']}
+                {dateFormatter(lc.schedule)}
             </Text>
             <GreenButton
-                text={lc['name']}
+                text={lc.name}
                 press={()=>alert('LC09')}
             />
         </View>
@@ -75,9 +84,12 @@ export default function HomeScreen() {
                     resizeMode='contain'
                 />
                 <View style={styles.headerFgInfo}>
-                    <Text style={styles.headerFgName}>{fgData['name']} FG</Text>
-                    <Text style={basicStyles.contentText}> {firstLCData['schedule']} 진행 LC {firstLCData['name']}</Text>
-                    <Text>{firstLCData['name']} 접수 인원  {totalRegister}</Text>
+                    <Text style={styles.headerFgName}>{loggedUser.name} FG</Text>
+                    <Text style={basicStyles.contentText}> {today} 진행 LC {lc}</Text>
+                    {
+                        lc !== '-' &&
+                        <Text>{lc} 접수 인원  {totalRegister}</Text>
+                    }
                 </View>
             </View>
 
@@ -90,7 +102,7 @@ export default function HomeScreen() {
                         navigation.navigate('RegisterList', {});
                     }}
                 >
-                    <Text style={{fontSize: 14, color: Colors.primary}}>{firstLCData['name']}</Text>
+                    <Text style={{fontSize: 14, color: Colors.primary}}>{lc}</Text>
                 </Button>
                 <Button
                     icon="chatbubbles-outline"
