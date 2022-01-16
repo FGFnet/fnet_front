@@ -1,47 +1,93 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 import { InputForm, Header, PaperTable } from '../../components';
 import { Colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DocumentPicker from 'react-native-document-picker'
 import api from '../../utils/api';
 
 export default function FreshmenListScreen() {
     const tableHeader= {'#': 'index', '이름': 'name', '전화번호': 'phone_number', 'LC': 'lc', '계열': 'department'}
     const [tableData, updateTableData] = React.useState([])
     const [loading, setLoading] = useState(false)
-    const [searchData, setSearchData] = React.useState([])
     const [searchQuery, setSearchQuery] = React.useState('')
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                setLoading(true)
-                const res = await api.getFreshmanList()
-                updateTableData(res.data.data)
-                setSearchData(res.data.data)
-            } catch (err) {
-            }
-            setLoading(false)
+    const [singleFile, setSingleFile] = useState(null);
+
+    const fetchUsers = async () => {
+        try {
+            setLoading(true)
+            const res = await api.getFreshmanList()
+            updateTableData(res.data.data)
+        } catch (err) {
+            alert(err)
         }
+        setLoading(false)
+    }
+
+    const uploadFile = async () => {
+        if (singleFile != null) {
+            const formData = new FormData();
+            let file = {
+                uri: singleFile.uri,
+                type: 'multipart/form-data',
+                name: String(singleFile).split("/").pop()
+            }
+            formData.append('file', file)
+            
+            try {
+                const res = await api.uploadFreshman(
+                    formData
+                );
+                if (!res.data.error) {
+                    alert('Upload Successful');
+                    setSingleFile(null)
+                    await fetchUsers()
+                }
+            } catch (err) {
+                alert(err)
+            }
+        } else {
+            alert("No file selected")
+        }
+    }
+
+    const selectFile = async () => {
+        try {
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker.types.allFiles],
+            });
+            setSingleFile(res[0]);
+        } catch (err) {
+            setSingleFile(null);
+            if (DocumentPicker.isCancel(err)) {
+                alert('Canceled');
+            } else {
+                alert('Unknown Error: ' + JSON.stringify(err));
+                throw err;
+            }
+        }
+    }
+
+    useEffect(() => {
         fetchUsers()
     }, [])
 
     const onChangeSearch = (query) => {
         setSearchQuery(query)
-        const searchResult = []
-        searchData.forEach((value) => {
-            for (var key in value) {
-                if (value[key].toString().search(query) !== -1) {
-                    const data = Object.assign({}, value)
-                    searchResult.push(data)
-                    break
-                }
-            }
-        })
-        updateTableData(searchResult)
     }
 
-    if (loading) return (<Text>로딩중..</Text>);
+    async function onSubmit () { // search by freshman name
+        try {
+            setLoading(true)
+            const res = await api.searchFreshman(searchQuery)
+            updateTableData(res.data.data)
+        } catch (err) {
+            alert(err)
+        }
+        setLoading(false)
+    }
+
     return(
         <ScrollView nestedScrollEnabled = {true}>
             <View style={styles.header}>
@@ -52,6 +98,9 @@ export default function FreshmenListScreen() {
                         height={35}
                         value={searchQuery}
                         onChangeText={onChangeSearch}
+                        multiline={false}
+                        onSubmitEditing={onSubmit}
+                        placeholder='이름'
                     />
                     <Icon
                         style={styles.inputIcon}
@@ -65,7 +114,26 @@ export default function FreshmenListScreen() {
             <PaperTable
                 header={tableHeader}
                 data={tableData}
+                loading={loading}
             />
+
+            <TouchableOpacity
+                style={styles.buttonStyle}
+                activeOpacity={0.5}
+                onPress={selectFile}>
+                <Text style={styles.buttonTextStyle}>Select FG List (Excel)</Text>
+            </TouchableOpacity>
+            {singleFile != null ? (
+                <Text style={styles.textStyle}>
+                    File: {singleFile.name ? singleFile.name : ''}
+                </Text>
+            ) : null}
+            <TouchableOpacity
+                style={styles.buttonStyle}
+                activeOpacity={0.5}
+                onPress={uploadFile}>
+                <Text style={styles.buttonTextStyle}>Upload Selected File</Text>
+            </TouchableOpacity>
         </ScrollView>
     )
 }
@@ -88,5 +156,31 @@ const styles = StyleSheet.create({
     inputIcon: {
         position: 'absolute',
         paddingRight: 10
+    },
+    textStyle: {
+        backgroundColor: '#fff',
+        fontSize: 15,
+        marginTop: 16,
+        marginLeft: 35,
+        marginRight: 35,
+        textAlign: 'center',
+        color: Colors.primary
+    },
+    buttonStyle: {
+        backgroundColor: Colors.primary,
+        borderWidth: 0,
+        color: '#FFFFFF',
+        borderColor: Colors.primary,
+        height: 40,
+        alignItems: 'center',
+        borderRadius: 30,
+        marginLeft: 35,
+        marginRight: 35,
+        marginTop: 15,
+    },
+    buttonTextStyle: {
+        color: '#FFFFFF',
+        paddingVertical: 10,
+        fontSize: 16,
     },
 });
