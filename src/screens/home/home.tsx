@@ -7,7 +7,6 @@ import {useNavigation} from '../../providers';
 
 export default function HomeScreen() {
     const navigation = useNavigation();
-
     return(
         <ScrollView>
             <Button
@@ -93,8 +92,10 @@ export default function HomeScreen() {
                             2021.02.14
                         </Text>
                         <GreenButton
-                            text='LC09'
-                            press={()=>alert('LC09')}
+                            text='LC10'
+                            press={() => {
+                                navigation.navigate('LCList', {'lcName': 'lc10'})
+                            }}
                         />
                     </View>
                     <View style={styles.schedule}>

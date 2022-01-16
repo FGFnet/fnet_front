@@ -6,7 +6,7 @@ import { HomeScreen, ChatScreen,
     NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, 
     RegisterScreen, RegisterListScreen, SettingScreen, 
     SetScheduleScreen, FGListScreen, FreshmenListScreen, 
-    LoginScreen, LCSettingScreen 
+    LoginScreen, LCSettingScreen, LCListScreen
 } from '../screens';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -24,6 +24,7 @@ export type ParamList = {
     FGList: {};
     FreshmenList: {};
     LCSetting: {};
+    LCList: {};
 }
 
 export const useNavigation = () => {
@@ -54,6 +55,7 @@ export function NavigationProvider() {
                 <Stack.Screen name="FreshmenList" component={FreshmenListScreen}/>
                 <Stack.Screen name="Login" component={LoginScreen}/>
                 <Stack.Screen name="LCSetting" component={LCSettingScreen}/>
+                <Stack.Screen name="LCList" component={LCListScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
