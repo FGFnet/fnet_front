@@ -14,7 +14,7 @@ export default function HomeScreen() {
 
     const [fgData, setFGData] = useState([]) // FG info
     const [lcData, setLCData] = useState([]) // LC list of FG
-    const [firstLCData, setFirstLCData] = useState({"name": "", "schedule": "/"})
+    // const [firstLCData, setFirstLCData] = useState({"name": "", "schedule": "/"})
 
     const [totalRegister, setTotalRegister] = useState(0)
     const [loading, setLoading] = useState(false)
@@ -23,8 +23,6 @@ export default function HomeScreen() {
         const fetchUsers = async() => {
             try {
                 setLoading(true)
-                const res_fg = await api.getFG()
-                setFGData(res_fg.data.data)
                 const res_lc = await api.getLC()
                 setLCData(res_lc.data.data)
                 if (res_lc.data.length > 0){
