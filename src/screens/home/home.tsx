@@ -99,7 +99,7 @@ export default function HomeScreen() {
                     contentStyle={styles.button}
                     labelStyle={{fontSize: 30}}
                     onPress={() => {
-                        navigation.navigate('RegisterList', {});
+                        navigation.navigate('RegisterList', {name: lc});
                     }}
                 >
                     <Text style={{fontSize: 14, color: Colors.primary}}>{lc}</Text>
