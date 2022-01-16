@@ -32,7 +32,12 @@ export default {
     })
   },
   uploadFGList (data) {
-    return ajax('admin/fg', 'post', {
+    return ajax('admin/fg/', 'post', {
+      data
+    })
+  },
+  uploadFGFile (data) {
+    return ajax('admin/fg/file', 'post', {
       data
     })
   },
@@ -138,7 +143,7 @@ export default {
     return ajax('admin/freshman', 'get')
   },
   uploadFreshman (data) {
-    return ajax('admin/freshman/file', 'post', {
+    return ajax('admin/freshman/file/', 'post', {
       data
     })
   },
