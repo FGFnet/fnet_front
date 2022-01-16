@@ -12,27 +12,27 @@ export default {
     })
   },
   logout () {
-    return ajax('logout', 'get')
+    return ajax('logout/', 'get')
   },
   getUserInfo () {
-    return ajax('userInfo', 'get')
+    return ajax('userInfo/', 'get')
   },
   getFG (id) {
-    return ajax('fg', 'get', {
+    return ajax('fg/', 'get', {
       params: {
         id
       }
     })
   },
   getFGList (active) {
-    return ajax('fg', 'get', {
+    return ajax('fg/', 'get', {
       params: {
         active: active
       }
     })
   },
   uploadFGList (data) {
-    return ajax('admin/fg', 'post', {
+    return ajax('admin/fg/', 'post', {
       data
     })
   },
@@ -105,14 +105,14 @@ export default {
     })
   },
   deleteLC (id) {
-    return ajax('lc', 'delete', {
+    return ajax('lc/', 'delete', {
       params: {
         id
       }
     })
   },
   getLCMemberList (name, register) {
-    return ajax('freshman/lc', 'get', {
+    return ajax('freshman/lc/', 'get', {
       params: {
         name: name,
         register: register // null, undefined인 경우 제거됨. https://github.com/axios/axios/issues/1139
@@ -120,27 +120,27 @@ export default {
     })
   },
   getFreshman (id) {
-    return ajax('admin/freshman', 'get', {
+    return ajax('admin/freshman/', 'get', {
       params: {
         id
       }
     })
   },
   getFreshmanList () {
-    return ajax('admin/freshman', 'get')
+    return ajax('admin/freshman/', 'get')
   },
   uploadFreshman (data) {
-    return ajax('admin/freshman/file', 'post', {
+    return ajax('admin/freshman/file/', 'post', {
       data
     })
   },
   registerFreshman (data) {
-    return ajax('admin/freshman/register', 'put', {
+    return ajax('admin/freshman/register/', 'put', {
       data
     })
   },
   searchFreshman (query) {
-    return ajax('admin/freshman/search', 'get', {
+    return ajax('admin/freshman/search/', 'get', {
       params: {
         query
       }

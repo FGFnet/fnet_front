@@ -14,7 +14,7 @@ export default function HomeScreen() {
 
     const [fgData, setFGData] = useState([]) // FG info
     const [lcData, setLCData] = useState([]) // LC list of FG
-    const [firstLCData, setFirstLCData] = useState({"name": "", "schedule": "/"})
+    // const [firstLCData, setFirstLCData] = useState({"name": "", "schedule": "/"})
 
     const [totalRegister, setTotalRegister] = useState(0)
     const [loading, setLoading] = useState(false)
@@ -23,8 +23,6 @@ export default function HomeScreen() {
         const fetchUsers = async() => {
             try {
                 setLoading(true)
-                const res_fg = await api.getFG()
-                setFGData(res_fg.data.data)
                 const res_lc = await api.getLC()
                 setLCData(res_lc.data.data)
                 if (res_lc.data.length > 0){
@@ -139,39 +137,8 @@ export default function HomeScreen() {
                         }}
                     > </Button>
                 </View>
-<<<<<<< HEAD
-                <View style={basicStyles.insideContainer}>
-                    <View style={styles.schedule}>
-                        <Text style={{paddingRight: 20}}>
-                            2021.02.14
-                        </Text>
-                        <GreenButton
-                            text='LC10'
-                            press={() => {
-                                navigation.navigate('LCList', {'lcName': 'lc10'})
-                            }}
-                        />
-                    </View>
-                    <View style={styles.schedule}>
-                        <Text style={{paddingRight: 20}}>
-                            2021.02.15
-                        </Text>
-                        <GreenButton
-                            text='LC57'
-                        />
-                    </View>
-                    <View style={styles.schedule}>
-                        <Text style={{paddingRight: 20}}>
-                            2021.02.16
-                        </Text>
-                        <GreenButton
-                            text='LC88'
-                        />
-                    </View>
-=======
                 <View style={basicStyles.insideContainer}> 
                    {otSchedule}
->>>>>>> 55f343291fea30649beed20601bf7dc3be27be4e
                 </View>
             </View>
         </ScrollView>
