@@ -30,12 +30,15 @@ export default function HomeScreen() {
         try {
             setLoading(true)
             const res = await api.getLC()
-            const todayDate = new Date()
+            const LCList = res.data.data
+            let todayDate = new Date()
+            todayDate.setHours(0,0,0,0)
             setToday((todayDate.getMonth()+1)+'/'+todayDate.getDate())
             if (res.data.data.length > 0){
                 setLCList(res.data.data)
-                lcList.map(async (lc)=>{
-                    const schedule = new Date(lc.schdule)
+                LCList.map(async (lc)=>{
+                    let schedule = new Date(lc.schedule)
+                    schedule.setHours(0,0,0,0)
                     if (todayDate.getTime() == schedule.getTime()) {
                         setLC(lc.name)
                         const res = await api.getLCMemberList(lc.name, true)
@@ -49,6 +52,15 @@ export default function HomeScreen() {
         setLoading(false)
     };
 
+    function isDateSame(date1,date2) {
+        if(date1.getFullYear()===date2.getFullYear()
+            && date1.getMonth()===date2.getMonth()
+            && date1.getDate()===date2.getDate()) {
+                return true
+        }
+        return false
+    }
+
     function dateFormatter(date) {
         const schedule = new Date(date)
         return schedule.getFullYear() + '.' + (schedule.getMonth()+1) + '.' + schedule.getDate()
@@ -61,7 +73,7 @@ export default function HomeScreen() {
             </Text>
             <GreenButton
                 text={lc.name}
-                press={()=>alert('LC09')}
+                press={() => navigation.navigate('LCList',{lcName: lc.name})}
             />
         </View>
     )
