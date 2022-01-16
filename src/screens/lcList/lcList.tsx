@@ -19,7 +19,6 @@ export default function LCListScreen({route}) {
           try {
               setLoading(true)
               const res = await api.getLCMemberList(lcName)
-              console.log(lcName)
               updateTableData(res.data.data)
               setSearchData(res.data.data)
           } catch (err) {
@@ -44,7 +43,6 @@ export default function LCListScreen({route}) {
       updateTableData(searchResult)
   }
 
-//   if (loading) return (<Text>로딩중..</Text>);
   return(
       <ScrollView nestedScrollEnabled = {true}>
           <View style={basicStyles.container}>
@@ -70,6 +68,7 @@ export default function LCListScreen({route}) {
                 <PaperTable
                     header={tableHeader}
                     data={tableData}
+                    loading={loading}
                 />
             </View>
         </View>
