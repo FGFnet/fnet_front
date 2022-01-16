@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = process.env.FNET_ENV ? 'http://3.34.123.79' :
+axios.defaults.baseURL = process.env.FNET_ENV ? 'http://3.34.123.79' : // FIXME: Cannot get env on Apptore.
                         Platform.OS === 'ios' ? 'http://127.0.0.1:8000' : 'http://10.0.2.2:8000'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 axios.defaults.xsrfCookieName = 'csrftoken'
@@ -145,6 +145,13 @@ export default {
   registerFreshman (data) {
     return ajax('admin/freshman/register', 'put', {
       data
+    })
+  },
+  searchFreshman (query) {
+    return ajax('admin/freshman/search', 'get', {
+      params: {
+        query
+      }
     })
   }
 }
