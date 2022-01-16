@@ -175,17 +175,19 @@ export default function NoticeDetailScreen({route}) {
     
     return(
         <View style={{flex:1}}>
-            <View style={{flexDirection:'row', justifyContent:'flex-end', alignContent: 'center', position: 'absolute', top: 10, right: 10}}>
-                <Menu
-                    visible={menuVisible}
-                    anchor={<IconButton icon="ellipsis-horizontal" onPress={openMenu} size={15}/>}
-                    onRequestClose={closeMenu}
-                >
-                    <MenuItem onPress={editNotice}><Icon name="create-outline"/> Edit</MenuItem>
-                    <MenuItem onPress={deleteNotice}><Icon name="trash-outline"/> Delete</MenuItem>
-                    <MenuItem onPress={closeMenu}><Icon name="close-outline"/> Close</MenuItem>
-                </Menu>
-            </View>
+            {
+                loggedUser.is_admin && 
+                <View style={{flexDirection:'row', justifyContent:'flex-end', alignContent: 'center', position: 'absolute', top: 10, right: 10}}>
+                    <Menu
+                        visible={menuVisible}
+                        anchor={<IconButton icon="ellipsis-horizontal" onPress={openMenu} size={15}/>}
+                        onRequestClose={closeMenu}
+                    >
+                        <MenuItem onPress={editNotice}><Icon name="create-outline"/> Edit</MenuItem>
+                        <MenuItem onPress={deleteNotice}><Icon name="trash-outline"/> Delete</MenuItem>
+                    </Menu>
+                </View>
+            }
             <View style={basicStyles.container}>
                 <View style={basicStyles.insideContainer}>
                     <View style={styles.noticeTitle}>
