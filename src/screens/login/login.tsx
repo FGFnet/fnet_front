@@ -53,7 +53,7 @@ export default function LoginScreen() {
                         onChangeText={(text) => setStudentId(text)}
                     />
                 </View>
-                <View style={styles.checkbox_container}>
+                {/* <View style={styles.checkbox_container}>
                     <Checkbox
                         status={checked ? 'checked' : 'unchecked'}
                         onPress={() => {
@@ -61,7 +61,7 @@ export default function LoginScreen() {
                         }}
                     />
                     <Text>자동 로그인</Text>
-                </View>
+                </View> */}
                 <View style={styles.container}>
                     <Button
                         style={styles.button}

@@ -1,21 +1,74 @@
-import React from 'react';
-import {View, Image, StyleSheet, ScrollView} from 'react-native';
-import {Text, Button, Divider} from 'react-native-paper';
-import {Colors} from '../../constants';
+import React, { useState, useEffect } from 'react';
+import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import { Text, Button, Divider } from 'react-native-paper';
+import { Colors } from '../../constants';
 import { basicStyles, GreenButton, Header } from '../../components';
-import {useNavigation} from '../../providers';
+import { useNavigation } from '../../providers';
+import { useSelector } from 'react-redux';
+import type { AppState, User } from '../../store';
+import api from '../../utils/api'
 
 export default function HomeScreen() {
     const navigation = useNavigation();
+    const loggedUser = useSelector<AppState, User>((state) => state.loggedUser)
+
+    const [fgData, setFGData] = useState([]) // FG info
+    const [lcData, setLCData] = useState([]) // LC list of FG
+    const [firstLCData, setFirstLCData] = useState({"name": "", "schedule": "/"})
+
+    const [totalRegister, setTotalRegister] = useState(0)
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        const fetchUsers = async() => {
+            try {
+                setLoading(true)
+                const res_fg = await api.getFG()
+                setFGData(res_fg.data.data)
+                const res_lc = await api.getLC()
+                setLCData(res_lc.data.data)
+                if (res_lc.data.length > 0){
+                    const firstDate = lcData[0]['schedule'].split('-')
+                    setFirstLCData({"name": lcData[0]['name'], "schedule": +firstDate[1] + '/' + +firstDate[2]})
+                    const res_register = await api.getLCMemberList(firstLCData['id'], true)
+                    setTotalRegister(res_register.data.length)
+                }
+            } catch(err) {
+
+            }
+            setLoading(false)
+        };
+        fetchUsers();
+    })
+
+    
+    const is_admin = () => {
+        if (fgData['is_admin']) return 1
+        else return 0
+    }
+
+    var otSchedule = lcData.map((lc) =>
+        <View key = {lc['id']} style={styles.schedule}>
+            <Text style={{paddingRight: 20}}>
+                {lc['schedule']}
+            </Text>
+            <GreenButton
+                text={lc['name']}
+                press={()=>alert('LC09')}
+            />
+        </View>
+    )
+
+    if (loading) return (<Text>Loading...</Text>)
     return(
         <ScrollView>
-            <Button
+            { loggedUser.is_admin && <Button
                 style={{position: 'absolute', bottom:0, right:0, zIndex: 1}}
                 icon="settings-outline"
                 onPress={() => {
                     navigation.navigate('Setting', {})
                 }}
-            >admin</Button>
+            >admin</Button> }
             
             <View style={styles.header}>
                 <Image
@@ -24,9 +77,9 @@ export default function HomeScreen() {
                     resizeMode='contain'
                 />
                 <View style={styles.headerFgInfo}>
-                    <Text style={styles.headerFgName}>김하늘 FG</Text>
-                    <Text style={basicStyles.contentText}>2/14 진행 LC  LC09</Text>
-                    <Text>LC09 접수 인원  15</Text>
+                    <Text style={styles.headerFgName}>{fgData['name']} FG</Text>
+                    <Text style={basicStyles.contentText}> {firstLCData['schedule']} 진행 LC {firstLCData['name']}</Text>
+                    <Text>{firstLCData['name']} 접수 인원  {totalRegister}</Text>
                 </View>
             </View>
             
@@ -39,7 +92,7 @@ export default function HomeScreen() {
                         navigation.navigate('RegisterList', {});
                     }}
                 >
-                    <Text style={{fontSize: 14, color: Colors.primary}}>LC 09</Text>
+                    <Text style={{fontSize: 14, color: Colors.primary}}>{firstLCData['name']}</Text>
                 </Button>
                 <Button
                     icon="chatbubbles-outline"
@@ -68,7 +121,7 @@ export default function HomeScreen() {
                     contentStyle={styles.button}
                     labelStyle={{fontSize: 30}}
                     onPress={() => {
-                        navigation.navigate('Register', {});
+                        loggedUser.is_admin ? navigation.navigate('Register', {}) : alert("Permission Denied")
                     }}
                 >
                     <Text style={{fontSize: 14, color: Colors.primary}}>Register</Text>
@@ -86,6 +139,7 @@ export default function HomeScreen() {
                         }}
                     > </Button>
                 </View>
+<<<<<<< HEAD
                 <View style={basicStyles.insideContainer}>
                     <View style={styles.schedule}>
                         <Text style={{paddingRight: 20}}>
@@ -114,6 +168,10 @@ export default function HomeScreen() {
                             text='LC88'
                         />
                     </View>
+=======
+                <View style={basicStyles.insideContainer}> 
+                   {otSchedule}
+>>>>>>> 55f343291fea30649beed20601bf7dc3be27be4e
                 </View>
             </View>
         </ScrollView>
