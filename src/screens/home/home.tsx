@@ -127,7 +127,7 @@ export default function HomeScreen() {
                     contentStyle={styles.button}
                     labelStyle={{fontSize: 30}}
                     onPress={() => {
-                        navigation.navigate('Chat', {});
+                        alert('개발 중입니다!');
                     }}
                 >
                     <Text style={{fontSize: 14, color: Colors.primary}}>Chat</Text>
