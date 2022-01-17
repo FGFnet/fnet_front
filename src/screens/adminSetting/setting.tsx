@@ -16,16 +16,6 @@ export default function SettingScreen() {
                 <List.Section style={styles.list}>
                     <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate('SetSchedule',{})
-                        }}
-                    >
-                        <List.Item title="OT Schedule"
-                            titleStyle={styles.list_item_title}
-                            style={styles.list_item}
-                            right={() => <List.Icon color={Colors.darker} icon="chevron-forward-outline" />}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
                             navigation.navigate('FGList',{})
                         }}
                     >
