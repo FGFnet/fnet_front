@@ -12,8 +12,7 @@ export default function RegisterListScreen({route}) {
     const [totalRegister, setTotalRegister] = useState(0)
 
     const tableHeader = {'#': 'index', 
-                        '이름': 'name', 
-                        '성별': 'sex', 
+                        '이름': 'name',
                         '계열': 'department', 
                         '접수': 'register'}
     
