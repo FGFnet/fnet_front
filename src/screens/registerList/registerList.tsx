@@ -22,7 +22,7 @@ export default function RegisterListScreen({route}) {
             const res = await api.getLCMemberList(name)
             setLCMemberList(res.data.data)
             lcMemberList.filter((lcMember)=> {
-                if (lcMember.register === true) {
+                if (lcMember.register === 'O') {
                     setTotalRegister(totalRegister+1)
                 }
             })

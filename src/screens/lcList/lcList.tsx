@@ -19,7 +19,6 @@ export default function LCListScreen({route}) {
           try {
               setLoading(true)
               const res = await api.getLCMemberList(lcName)
-              console.log(lcName)
               updateTableData(res.data.data)
               setSearchData(res.data.data)
           } catch (err) {
