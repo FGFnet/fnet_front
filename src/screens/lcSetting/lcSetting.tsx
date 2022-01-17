@@ -44,7 +44,10 @@ export default function LCSettingScreen() {
             schedule: schedule
         }
         try {
-            await api.updateLC(data)
+            const res = await api.updateLC(data)
+            if(res.data.error === false) {
+                alert("저장되었습니다")
+            }
         } catch(err) {
         }
     }
