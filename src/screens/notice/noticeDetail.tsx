@@ -62,6 +62,10 @@ export default function NoticeDetailScreen({route}) {
             diff += '년 전'
         } else {
             let diffDate = nowDate.getTime() - createTimeDate.getTime()
+            if (diffDate < 0) {
+                diff = '0분 전'
+                return diff
+            }
             const daySec = 24 * 60 * 60 * 1000
             const diffMonth = Math.floor(diffDate/(daySec*30))
             diffDate = diffDate - diffMonth * daySec * 30
