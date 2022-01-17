@@ -34,6 +34,7 @@ export default function FGListScreen() {
             }
             formData.append('file', file)
             
+            setLoading(true)
             try {
                 const res = await api.uploadFGFile(
                     formData
@@ -45,6 +46,8 @@ export default function FGListScreen() {
                 }
             } catch (err) {
                 alert(err)
+            } finally {
+                setLoading(false)
             }
         } else {
             alert("No file selected")

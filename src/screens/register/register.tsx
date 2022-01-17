@@ -10,6 +10,7 @@ export default function RegisterScreen() {
     const checkboxKey = 'register'
     const [tableData, updateTableData] = React.useState([])
     const [searchQuery, setSearchQuery] = React.useState('')
+    const [searchData, setSearchData] = React.useState([])
     const [loading, setLoading] = useState(false);
 
     async function fetchUsers () {
@@ -17,6 +18,7 @@ export default function RegisterScreen() {
             setLoading(true)
             const res = await api.getFreshmanList()
             updateTableData(res.data.data)
+            setSearchData(res.data.data)
         } catch (err) {
             alert(err)
         }
@@ -35,6 +37,17 @@ export default function RegisterScreen() {
 
     const onChangeSearch = (query) => {
         setSearchQuery(query)
+        const searchResult = []
+        searchData.forEach((value) => {
+            for (var key in value) {
+                if (value[key].toString().search(query) !== -1) {
+                    const data = Object.assign({}, value)
+                    searchResult.push(data)
+                    break
+                }
+            }
+        })
+        updateTableData(searchResult)
     }
 
     async function onSubmit () { // search by freshman name
