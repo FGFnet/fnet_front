@@ -143,7 +143,7 @@ export default function HomeScreen() {
                     contentStyle={styles.button}
                     labelStyle={{fontSize: 30}}
                     onPress={() => {
-                        loggedUser.is_admin ? navigation.navigate('Register', {}) : alert("Permission Denied")
+                        loggedUser.is_admin ? navigation.navigate('Register', {}) : alert("접근권한이 없습니다. :<")
                     }}
                 >
                     <Text style={{fontSize: 14, color: Colors.primary}}>Register</Text>
