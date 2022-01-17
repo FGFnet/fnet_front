@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, ScrollView } from 'react-native';
-import { Text, Button, Divider } from 'react-native-paper';
+import { Text, Button, Divider, ActivityIndicator } from 'react-native-paper';
 import { Colors } from '../../constants';
 import { basicStyles, GreenButton, Header } from '../../components';
 import { useNavigation } from '../../providers';
@@ -78,7 +78,13 @@ export default function HomeScreen() {
         </View>
     )
 
-    if (loading) return (<Text>Loading...</Text>)
+    if (loading) return (
+        <ActivityIndicator 
+            animating={true} 
+            size={'large'} 
+            color={Colors.primary_lighter} 
+            style={{marginTop: basicStyles.paperTable.height/3}}
+        />)
     return(
         <ScrollView>
             { loggedUser.is_admin && <Button
