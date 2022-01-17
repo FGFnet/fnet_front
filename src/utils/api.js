@@ -33,7 +33,7 @@ export default {
     })
   },
   uploadFGFile (data) {
-    return ajax('admin/fg/file', 'post', {
+    return ajax('admin/fg/file/', 'post', {
       data
     })
   },
@@ -48,12 +48,12 @@ export default {
     return ajax('notice/', 'get')
   },
   createNotice (data) {
-    return ajax('admin/notice', 'post', {
+    return ajax('admin/notice/', 'post', {
       data
     })
   },
   editNotice (data) {
-    return ajax('admin/notice', 'put', {
+    return ajax('admin/notice/', 'put', {
       data
     })
   },
@@ -72,12 +72,12 @@ export default {
     })
   },
   createComment (data) {
-    return ajax('notice/comment', 'post', {
+    return ajax('notice/comment/', 'post', {
       data
     })
   },
   editComment (data) {
-    return ajax('notice/comment', 'put', {
+    return ajax('notice/comment/', 'put', {
       data
     })
   },
@@ -89,7 +89,7 @@ export default {
     })
   },
   checkComment (data) {
-    return ajax('admin/notice/comment', 'put', {
+    return ajax('admin/notice/comment/', 'put', {
       data
     })
   },
