@@ -35,6 +35,7 @@ export default function FreshmenListScreen() {
             }
             formData.append('file', file)
             
+            setLoading(true)
             try {
                 const res = await api.uploadFreshman(
                     formData
@@ -46,6 +47,8 @@ export default function FreshmenListScreen() {
                 }
             } catch (err) {
                 alert(err)
+            } finally {
+                setLoading(false)
             }
         } else {
             alert("No file selected")
@@ -121,7 +124,7 @@ export default function FreshmenListScreen() {
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
                 onPress={selectFile}>
-                <Text style={styles.buttonTextStyle}>Select FG List (Excel)</Text>
+                <Text style={styles.buttonTextStyle}>Select Freshmen List (Excel)</Text>
             </TouchableOpacity>
             {singleFile != null ? (
                 <Text style={styles.textStyle}>
