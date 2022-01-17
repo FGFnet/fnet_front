@@ -16,18 +16,24 @@ export default function RegisterListScreen({route}) {
                         '계열': 'department',
                         '접수': 'register'}
 
+    async function updateLCMemberList() {
+        var total = 0
+        lcMemberList.forEach((lcMember)=> {
+            if (lcMember.register === 'O') {
+                total++
+            }
+        })
+        setTotalRegister(total)
+    }
+
+    useEffect(()=>{
+        updateLCMemberList()
+    },[lcMemberList])
+    
     async function getLCMemberList(name) {
         try {
             const res = await api.getLCMemberList(name)
-            const LCMemberList = res.data.data
-            let total = 0
             setLCMemberList(res.data.data)
-            LCMemberList.filter((lcMember)=> {
-                if (lcMember.register === 'O') {
-                    total += 1
-                }
-            })
-            setTotalRegister(total)
         } catch(err) {
         }
     }
