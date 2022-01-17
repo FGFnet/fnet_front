@@ -61,7 +61,7 @@ export default function PaperTable(props) {
                   ></IconButton>
                 ) :
               title === 'index' ? index++ :
-              title in val ? val[title] : null
+              title in val ? val[title].toString() : null
             }
           </DataTable.Cell>
         )

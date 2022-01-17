@@ -24,15 +24,16 @@ export default {
       }
     })
   },
-  getFGList (active) {
-    return ajax('fg/', 'get', {
-      params: {
-        active: active
-      }
-    })
+  getFGList () {
+    return ajax('admin/fg/', 'get')
   },
   uploadFGList (data) {
     return ajax('admin/fg/', 'post', {
+      data
+    })
+  },
+  uploadFGFile (data) {
+    return ajax('admin/fg/file', 'post', {
       data
     })
   },
@@ -47,12 +48,12 @@ export default {
     return ajax('notice/', 'get')
   },
   createNotice (data) {
-    return ajax('admin/notice/', 'post', {
+    return ajax('admin/notice', 'post', {
       data
     })
   },
   editNotice (data) {
-    return ajax('admin/notice/', 'put', {
+    return ajax('admin/notice', 'put', {
       data
     })
   },
@@ -71,12 +72,12 @@ export default {
     })
   },
   createComment (data) {
-    return ajax('notice/comment/', 'post', {
+    return ajax('notice/comment', 'post', {
       data
     })
   },
   editComment (data) {
-    return ajax('notice/comment/', 'put', {
+    return ajax('notice/comment', 'put', {
       data
     })
   },
@@ -141,6 +142,13 @@ export default {
   },
   searchFreshman (query) {
     return ajax('admin/freshman/search/', 'get', {
+      params: {
+        query
+      }
+    })
+  },
+  searchFG (query) {
+    return ajax('admin/fg/search/', 'get', {
       params: {
         query
       }
