@@ -11,20 +11,23 @@ export default function RegisterListScreen({route}) {
     const [lcMemberList, setLCMemberList] = useState([])
     const [totalRegister, setTotalRegister] = useState(0)
 
-    const tableHeader = {'#': 'index', 
+    const tableHeader = {'#': 'index',
                         '이름': 'name',
-                        '계열': 'department', 
+                        '계열': 'department',
                         '접수': 'register'}
-    
+
     async function getLCMemberList(name) {
         try {
             const res = await api.getLCMemberList(name)
+            const LCMemberList = res.data.data
+            let total = 0
             setLCMemberList(res.data.data)
-            lcMemberList.filter((lcMember)=> {
+            LCMemberList.filter((lcMember)=> {
                 if (lcMember.register === 'O') {
-                    setTotalRegister(totalRegister+1)
+                    total += 1
                 }
             })
+            setTotalRegister(total)
         } catch(err) {
         }
     }
