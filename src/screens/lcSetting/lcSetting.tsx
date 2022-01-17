@@ -25,11 +25,12 @@ export default function LCSettingScreen() {
         setDatePickerVisibility(false);
     };
 
+
     const handleConfirm = (date) => {
         hideDatePicker()
-        if (selectDay === '1') setFirstDate(date.format("yyyy/MM/dd"))
-        else if (selectDay === '2') setSecondDate(date.format("yyyy/MM/dd"))
-        else setThirdDate(date.format("yyyy/MM/dd"))
+        if (selectDay === '1') setFirstDate(dateFormatter(date))
+        else if (selectDay === '2') setSecondDate(dateFormatter(date))
+        else setThirdDate(dateFormatter(date))
     }
 
     function dateFormatter(date) {
