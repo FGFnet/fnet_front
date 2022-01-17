@@ -26,40 +26,40 @@ export default function HomeScreen() {
         },[])
     )
 
+    async function updateLC() {
+        setLC('-')
+        setTotalRegister(0)
+        let todayDate = new Date()
+        todayDate.setHours(0,0,0,0)
+        lcList.forEach(async (lc)=>{
+            let schedule = new Date(lc.schedule)
+            schedule.setHours(0,0,0,0)
+            if (todayDate.getTime() == schedule.getTime()) {
+                setLC(lc.name)
+                const res = await api.getLCMemberList(lc.name, true)
+                setTotalRegister(res.data.data.length)
+            }
+        })
+    }
+
+    useEffect(() => {
+        updateLC()
+    }, [lcList])
+
     async function init() {
         try {
             setLoading(true)
             const res = await api.getLC()
-            const LCList = res.data.data
             let todayDate = new Date()
             todayDate.setHours(0,0,0,0)
             setToday((todayDate.getMonth()+1)+'/'+todayDate.getDate())
             if (res.data.data.length > 0){
                 setLCList(res.data.data)
-                LCList.map(async (lc)=>{
-                    let schedule = new Date(lc.schedule)
-                    schedule.setHours(0,0,0,0)
-                    if (todayDate.getTime() == schedule.getTime()) {
-                        setLC(lc.name)
-                        const res = await api.getLCMemberList(lc.name, true)
-                        setTotalRegister(res.data.data.length)
-                    }
-                })
             }
-
         } catch(err) {
         }
         setLoading(false)
     };
-
-    function isDateSame(date1,date2) {
-        if(date1.getFullYear()===date2.getFullYear()
-            && date1.getMonth()===date2.getMonth()
-            && date1.getDate()===date2.getDate()) {
-                return true
-        }
-        return false
-    }
 
     function dateFormatter(date) {
         const schedule = new Date(date)
@@ -94,7 +94,6 @@ export default function HomeScreen() {
                     navigation.navigate('Setting', {})
                 }}
             >admin</Button> }
-
             <View style={styles.header}>
                 <Image
                     source={require('../../images/fg_two.png')}
@@ -110,7 +109,6 @@ export default function HomeScreen() {
                     }
                 </View>
             </View>
-
             <Divider/>
             <View style={styles.body}>
                 <Button icon="people-outline"
@@ -167,7 +165,7 @@ export default function HomeScreen() {
                         }}
                     > </Button>
                 </View>
-                <View style={basicStyles.insideContainer}>
+                <View style={basicStyles.insideContainer}> 
                    {otSchedule}
                 </View>
             </View>
