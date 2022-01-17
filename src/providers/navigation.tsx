@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen, ChatScreen, 
     NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, 
     RegisterScreen, RegisterListScreen, SettingScreen, 
-    SetScheduleScreen, FGListScreen, FreshmenListScreen, 
+    FGListScreen, FreshmenListScreen, 
     LoginScreen, LCSettingScreen, LCListScreen
 } from '../screens';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -20,7 +20,6 @@ export type ParamList = {
     Register: {};
     RegisterList: {};
     Setting: {};
-    SetSchedule: {};
     FGList: {};
     FreshmenList: {};
     LCSetting: {};
@@ -50,7 +49,6 @@ export function NavigationProvider() {
                 <Stack.Screen name="NoticeDetail" component={NoticeDetailScreen}/>
                 <Stack.Screen name="NoticeCreate" component={NoticeCreateScreen}/>
                 <Stack.Screen name="Setting" component={SettingScreen}/>
-                <Stack.Screen name="SetSchedule" component={SetScheduleScreen}/>
                 <Stack.Screen name="FGList" component={FGListScreen}/>
                 <Stack.Screen name="FreshmenList" component={FreshmenListScreen}/>
                 <Stack.Screen name="Login" component={LoginScreen}/>
