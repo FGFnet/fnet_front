@@ -153,7 +153,7 @@ export default function NoticeDetailScreen({route}) {
             return (
                 <View style={basicStyles.insideContainer} key={comment.id}>
                     <View style={styles.commentHeader}>
-                        {/* <Text style={basicStyles.contentText}>{comment.created_by.name}</Text> */}
+                        <Text style={basicStyles.contentText}>{comment.created_by.name} FG</Text>
                         <Text style={basicStyles.lightText}>{comment.time_diff}</Text>
                     </View>
                     <View style={styles.commentContent}>
