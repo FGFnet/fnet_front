@@ -100,8 +100,13 @@ export default {
       }
     })
   },
-  updateLC (data) {
+  createLC(data){
     return ajax('lc/', 'post', {
+      data
+    })
+  },
+  updateLC (data) {
+    return ajax('lc/', 'put', {
       data
     })
   },

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
-import { InputForm, Header, PaperTable } from '../../components';
+import { InputForm, Header, PaperTable, GreenButton, basicStyles } from '../../components';
 import { Colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DocumentPicker from 'react-native-document-picker'
@@ -13,6 +13,9 @@ export default function FreshmenListScreen() {
     const [loading, setLoading] = useState(false)
     const [searchQuery, setSearchQuery] = React.useState('')
     const [singleFile, setSingleFile] = useState(null);
+
+    const [startLC, setStartLC] = useState('')
+    const [endLC, setEndLC] = useState('')
 
     const fetchUsers = async () => {
         try {
@@ -72,6 +75,21 @@ export default function FreshmenListScreen() {
         }
     }
 
+    const createLC = async() => {
+        const data = {
+            start: Number(startLC),
+            end: Number(endLC)
+        }
+        try{
+            const res = await api.createLC(data)
+            if(res.data.error === false) {
+                alert("저장되었습니다")
+            }
+        } catch(err){
+
+        }
+    }
+
     useEffect(() => {
         fetchUsers()
     }, [])
@@ -113,6 +131,33 @@ export default function FreshmenListScreen() {
                     />
                 </View>
             </View>
+
+            <View style={basicStyles.insideRowContainer}>
+                <Text style={{paddingRight: 20}}>LC번호</Text>
+                <InputForm
+                    placeholder='시작번호'
+                    height={40}
+                    style={{width: '40%', paddingRight: 20}}
+                    value={startLC}
+                    onChangeText={text=>setStartLC(text)}
+                />
+                <InputForm
+                    placeholder='끝번호'
+                    height={40}
+                    style={{width: '40%', paddingRight: 20}}
+                    value={endLC}
+                    onChangeText={text=> setEndLC(text)}
+                />
+            </View>
+            <GreenButton
+                text='저장' 
+                viewStyle={{
+                    width:'100%', 
+                    flex: 1, 
+                    alignItems: 'flex-end'
+                }}
+                press={()=>createLC()}
+            />
 
             <PaperTable
                 header={tableHeader}
