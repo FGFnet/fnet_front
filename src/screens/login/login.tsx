@@ -24,7 +24,7 @@ export default function LoginScreen() {
             setLoading(false)
             return true
         } catch (err) {
-            alert(err)
+            alert(err.data.data)
         } finally {
             setLoading(false)
         }
@@ -52,30 +52,21 @@ export default function LoginScreen() {
                         placeholder='학번'
                         onChangeText={(text) => setStudentId(text)}
                     />
-                </View>
-                {/* <View style={styles.checkbox_container}>
-                    <Checkbox
-                        status={checked ? 'checked' : 'unchecked'}
-                        onPress={() => {
-                            setChecked(!checked);
-                        }}
-                    />
-                    <Text>자동 로그인</Text>
-                </View> */}
-                <View style={styles.container}>
-                    <Button
-                        style={styles.button}
-                        labelStyle={styles.button_text}
-                        onPress={async () => {
-                            const loggedIn = await login()
-                            if (loggedIn) {
-                                navigation.navigate('Home')
-                            }
-                        }}
-                        loading={loading}
-                    >
-                        Login
-                    </Button>
+                    <View style={styles.container}>
+                        <Button
+                            style={styles.button}
+                            labelStyle={styles.button_text}
+                            onPress={async () => {
+                                const loggedIn = await login()
+                                if (loggedIn) {
+                                    navigation.navigate('Home')
+                                }
+                            }}
+                            loading={loading}
+                        >
+                            Login
+                        </Button>
+                    </View>
                 </View>
             </View>
         </ScrollView>

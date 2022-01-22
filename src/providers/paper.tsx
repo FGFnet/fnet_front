@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 import {
   configureFonts,
   DefaultTheme,
@@ -42,7 +43,17 @@ export function PaperProvider({children}: {children: React.ReactNode}) {
         icon: props=><Ionicons {...props}/>
       }}
     >
-      {children}
+      <React.Fragment>
+        {Platform.OS === 'web' ? (
+          <style type="text/css">{`
+            @font-face {
+              font-family: 'Ionicons';
+              src: url(${require('react-native-vector-icons/Fonts/Ionicons.ttf')}) format('truetype');
+            }
+          `}</style>
+        ) : null}
+        {children}
+      </React.Fragment>
     </ReactNativePaperProvider>
   );
 }

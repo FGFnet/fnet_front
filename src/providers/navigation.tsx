@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer, NavigationProp,  useNavigation as useNativeNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { HomeScreen, ChatScreen, 
     NoticeScreen, NoticeDetailScreen, NoticeCreateScreen, 
@@ -30,7 +30,7 @@ export const useNavigation = () => {
     return useNativeNavigation<NavigationProp<ParamList>>();
 };
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export function NavigationProvider() {
     return (
@@ -38,7 +38,7 @@ export function NavigationProvider() {
             <Stack.Navigator
                 initialRouteName="Login"
                 screenOptions={{
-                    contentStyle: {backgroundColor: Colors.white}
+                    cardStyle: {backgroundColor: '#FFFFFF'}
                 }}
             >
                 <Stack.Screen name="Home" component={HomeScreen}/>
