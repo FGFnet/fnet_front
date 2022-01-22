@@ -45,8 +45,18 @@ const svgLoaderConfiguration = {
   ],
 };
 
+// const imageLoaderConfiguration = {
+//   test: /\.(gif|jpe?g|png)$/,
+//   use: {
+//     loader: 'url-loader',
+//     options: {
+//       name: '[name].[ext]',
+//     },
+//   },
+// };
+
 const imageLoaderConfiguration = {
-  test: /\.(gif|jpe?g|png|svg)$/,
+  test: /\.(gif|jpe?g|png|svg|ttf)$/,
   use: {
     loader: "url-loader",
     options: {
@@ -73,10 +83,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(woff|woff2|eot|ttf)$/,
-        loader: 'file-loader',
-      },
       babelLoaderConfiguration,
       imageLoaderConfiguration,
       svgLoaderConfiguration,
